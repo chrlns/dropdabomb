@@ -1,0 +1,13 @@
+Source: kcbomberman
+Section: games
+Priority: optional
+Maintainer: Christian Lins <cli@openoffice.org>
+Homepage: http://code.google.com/p/kcbomberman/
+Package: kcbomberman
+Version: 2.0.0-alpha1
+Architecture: all
+Depends: sun-java6-jre | openjdk-6-jre | java-virtual-machine,
+ java2-runtime, libxstream-java, libxpp3-java,
+ libswing-layout-java
+Description: kcbomberman 
+ KC Bomberman is clone of the classic Bomberman game written in Java.

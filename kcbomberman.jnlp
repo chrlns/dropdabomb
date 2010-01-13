@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<jnlp spec="0.2 1.0"
+      codebase="http://christianlins.netvader.net/bomberman"
+      href="kcbomberman.jnlp">
+   <information> 
+      <title>KCBomberman</title> 
+      <vendor>Kai Ritterbusch, Christian Lins</vendor>
+      <homepage href="http://code.google.com/p/kcbomberman/"/>
+      <description>Kai und Christian's Bomberman</description>
+      <offline-allowed/> 
+   </information> 
+   <resources>
+      <j2se version="1.6+"/>
+      <jar href="bomberman.jar" main="true" download="eager"/>
+      <jar href="jlayer-1.0.1.jar" main="false" download="eager"/>
+      <jar href="swing-layout-1.0.3.jar" main="false" download="eager"/>
+      <jar href="xstream-1.3.1.jar" main="false" download="eager" />
+   </resources>
+   <application-desc main-class="bomberman.Main">
+    <argument>--server</argument>
+    <argument>--headless</argument>
+    <argument>--client</argument>
+   </application-desc>
+</jnlp> 
