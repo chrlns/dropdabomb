@@ -15,7 +15,6 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package bomberman.net;
 
 import java.io.Serializable;
@@ -24,53 +23,43 @@ import java.io.Serializable;
  * Capsulates a method call and/or method result between server and client.
  * This is part of the Java RMI replacement. The class is serialized using
  * a platform and VM independent XML format.
- * @author Christian Lins (cli@openoffice.org)
+ * @author Christian Lins
  */
-public class Event implements Serializable
-{
-  
-  /** Name of the method being called on this event */
-  private String   methodName = null;
-  
-  /** Method parameters, may be null */
-  private Object[] arguments  = null;
-  
-  /**
-   * Most serializers need a default constructor.
-   */
-  public Event()
-  {
-  }
-  
-  public Event(String methodName, Object[] param)
-  {
-    this.arguments  = param;
-    this.methodName = methodName;
-  }
-  
-  public Event(Object[] param)
-  {
-    this.arguments = param;
-  }
+public class Event implements Serializable {
 
-  public Object[] getArguments() 
-  {
-    return arguments;
-  }
+	/** Name of the method being called on this event */
+	private String methodName = null;
+	/** Method parameters, may be null */
+	private Object[] arguments = null;
 
-  public String getMethodName() 
-  {
-    return methodName;
-  }
+	/**
+	 * Most serializers need a default constructor.
+	 */
+	public Event() {
+	}
 
-  public void setArguments(Object[] arguments) 
-  {
-    this.arguments = arguments;
-  }
+	public Event(String methodName, Object[] param) {
+		this.arguments = param;
+		this.methodName = methodName;
+	}
 
-  public void setMethodName(String methodName) 
-  {
-    this.methodName = methodName;
-  }
-  
+	public Event(Object[] param) {
+		this.arguments = param;
+	}
+
+	public Object[] getArguments() {
+		return arguments;
+	}
+
+	public String getMethodName() {
+		return methodName;
+	}
+
+	public void setArguments(Object[] arguments) {
+		this.arguments = arguments;
+	}
+
+	public void setMethodName(String methodName) {
+		this.methodName = methodName;
+	}
 }

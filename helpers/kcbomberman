@@ -1,3 +1,4 @@
 #!/bin/sh
-CLASSPATH=/usr/share/java/xstream.jar:/usr/share/java/xpp3.jar:/usr/share/java/swing-layout.jar
-java -classpath $CLASSPATH:/usr/share/java/kcbomberman.jar bomberman.Main --client
+JS=/usr/share/java
+CLASSPATH=$JS/xstream.jar:$JS/swing-layout.jar:$JS/kcbomberman.jar
+java -classpath $CLASSPATH bomberman.Main --server --headless --client

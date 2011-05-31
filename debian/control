@@ -1,0 +1,16 @@
+Source: kcbomberman
+Section: games
+Priority: optional
+Maintainer: 
+Homepage: https://bitbucket.org/cli/kcbomberman
+Standards-Version: 3.9.1.0
+Build-Depends: debhelper (>= 7.0.50~), openjdk-6-jdk, ant, libswing-layout-java,
+ libxstream-java, libxpp3-java
+
+Package: kcbomberman
+Architecture: all
+Depends: ${misc:Depends}, sun-java6-jre | openjdk-6-jre | java-virtual-machine,
+ java2-runtime, libxstream-java, libxpp3-java,
+ libswing-layout-java
+Description: kcbomberman
+ KC Bomberman is clone of the classic Bomberman game written in Java.
