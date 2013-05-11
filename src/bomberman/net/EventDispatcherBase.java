@@ -18,40 +18,39 @@
  */
 package bomberman.net;
 
-import java.io.BufferedOutputStream;
 import java.io.OutputStream;
-import jaxser.Jaxser;
+
+import com.esotericsoftware.kryo.Kryo;
+import com.esotericsoftware.kryo.io.Output;
 
 /**
  * Writes Events to an output stream.
+ * 
  * @author Christian Lins
  */
 public class EventDispatcherBase {
 
-	public static final byte[] XML_END = "\nEND\n".getBytes();
-	private OutputStream out = null;
-	private Jaxser jaxser = new Jaxser();
+    private final Output output;
+    private final Kryo   kryo = new Kryo();
 
-	public EventDispatcherBase(OutputStream out) {
-		if (!(out instanceof BufferedOutputStream)) {
-			out = new BufferedOutputStream(out);
-		}
-		this.out = out;
-	}
+    public EventDispatcherBase(OutputStream out) {
+        this.output = new Output(out);
+    }
 
-	/**
-	 * This method MUST be synchronized due to heavily asynchronous calls.
-	 * Otherwise the XML serialized data could be scattered on client side.
-	 * @param event
-	 */
-	protected synchronized void dispatchEvent(Event event) {
-		try {
-			this.jaxser.toXML(event, this.out);
-			this.out.write(XML_END);
-			this.out.flush();
-			System.out.println(this + " Event dispatched: " + event.getMethodName());
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-	}
+    /**
+     * This method MUST be synchronized due to heavily asynchronous calls.
+     * Otherwise the serialized data could be scattered on client side.
+     * 
+     * @param event
+     */
+    protected synchronized void dispatchEvent(Event event) {
+        try {
+            this.kryo.writeObject(output, event);
+            this.output.flush();
+            System.out.println(this + " Event dispatched: "
+                    + event.getMethodName());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 }

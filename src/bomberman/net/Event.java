@@ -1,6 +1,7 @@
 /*
- *  KC Bomberman
- *  Copyright 2009 Christian Lins <cli@openoffice.org>
+ *  DropDaBomb
+ *  Copyright (C) 2008-2013 Christian Lins <christian@lins.me>
+ *  Copyright (C) 2008 Kai Ritterbusch <kai.ritterbusch@googlemail.com>
  * 
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,46 +21,49 @@ package bomberman.net;
 import java.io.Serializable;
 
 /**
- * Capsulates a method call and/or method result between server and client.
- * This is part of the Java RMI replacement. The class is serialized using
- * a platform and VM independent XML format.
+ * Capsulates a method call and/or method result between server and client. This
+ * is part of the Java RMI replacement. The class is serialized using a platform
+ * and VM independent format.
+ * 
  * @author Christian Lins
  */
 public class Event implements Serializable {
 
-	/** Name of the method being called on this event */
-	private String methodName = null;
-	/** Method parameters, may be null */
-	private Object[] arguments = null;
+    private static final long serialVersionUID = 322185626106882609L;
 
-	/**
-	 * Most serializers need a default constructor.
-	 */
-	public Event() {
-	}
+    /** Name of the method being called on this event */
+    private String            methodName       = null;
+    /** Method parameters, may be null */
+    private Object[]          arguments        = null;
 
-	public Event(String methodName, Object[] param) {
-		this.arguments = param;
-		this.methodName = methodName;
-	}
+    /**
+     * Most serializers need a default constructor.
+     */
+    public Event() {
+    }
 
-	public Event(Object[] param) {
-		this.arguments = param;
-	}
+    public Event(String methodName, Object[] param) {
+        this.arguments = param;
+        this.methodName = methodName;
+    }
 
-	public Object[] getArguments() {
-		return arguments;
-	}
+    public Event(Object[] param) {
+        this.arguments = param;
+    }
 
-	public String getMethodName() {
-		return methodName;
-	}
+    public Object[] getArguments() {
+        return arguments;
+    }
 
-	public void setArguments(Object[] arguments) {
-		this.arguments = arguments;
-	}
+    public String getMethodName() {
+        return methodName;
+    }
 
-	public void setMethodName(String methodName) {
-		this.methodName = methodName;
-	}
+    public void setArguments(Object[] arguments) {
+        this.arguments = arguments;
+    }
+
+    public void setMethodName(String methodName) {
+        this.methodName = methodName;
+    }
 }
