@@ -1,7 +1,7 @@
 /*
- *  KC Bomberman
- *  Copyright 2008 Christian Lins <christian.lins@web.de>
- *  Copyright 2008 Kai Ritterbusch <kai.ritterbusch@googlemail.com>
+ *  DropDaBomb
+ *  Copyright (C) 2008-2013 Christian Lins <christian@lins.me>
+ *  Copyright (C) 2008 Kai Ritterbusch <kai.ritterbusch@googlemail.com>
  * 
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -16,30 +16,35 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package bomberman.server;
 
 import bomberman.server.api.Explodable;
 
 /**
  * An exploadable wall.
- * @author Christian Lins (christian.lins@web.de)
+ * 
+ * @author Christian Lins
  */
-class ExplodableWall extends Wall implements Explodable
-{
-  public static final String IMAGE_FILENAME = "resource/gfx/explodable_wall.png";
-  
-  public ExplodableWall(int x, int y)
-  {
-    super(x, y);
-  }
-  
-  /**
-   * Gets the filename of an Image
-   * @return Filename
-   */
-  public String getImageFilename()
-  {
-    return IMAGE_FILENAME;
-  }
+class ExplodableWall extends Wall implements Explodable {
+
+    private static final long  serialVersionUID = -1095368066934855550L;
+    public static final String IMAGE_FILENAME   = "resource/gfx/explodable_wall.png";
+
+    protected ExplodableWall() {
+
+    }
+
+    public ExplodableWall(int x, int y) {
+        super(x, y);
+    }
+
+    /**
+     * Gets the filename of an Image
+     * 
+     * @return Filename
+     */
+    @Override
+    public String getImageFilename() {
+        return IMAGE_FILENAME;
+    }
 }

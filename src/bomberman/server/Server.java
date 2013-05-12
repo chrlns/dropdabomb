@@ -1,6 +1,6 @@
 /*
- *  KC Bomberman
- *  Copyright (C) 2008-2011 Christian Lins <christian@lins.me>
+ *  DropDaBomb
+ *  Copyright (C) 2008-2013 Christian Lins <christian@lins.me>
  *  Copyright (C) 2008 Kai Ritterbusch <kai.ritterbusch@googlemail.com>
  * 
  *  This program is free software: you can redistribute it and/or modify
@@ -18,6 +18,8 @@
  */
 package bomberman.server;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +36,9 @@ import bomberman.server.api.Session;
 import bomberman.server.gui.ServerControlPanel;
 import bomberman.server.gui.UserListTableModel;
 import bomberman.util.CHAP;
+
+import com.esotericsoftware.kryo.Kryo;
+import com.esotericsoftware.kryo.io.Input;
 
 /**
  * Main KC Bomberman Server class. This huge singleton class contains most of
@@ -94,21 +99,24 @@ public class Server {
     private final BlockingQueue<List<Object>>           explosions   = new LinkedBlockingQueue<List<Object>>(
                                                                              25);
     private final Logger                                logger       = new Logger();
-    private final Database                              database     = null;
-    private final Highscore                             highscore    = null;
+    private Database                                    database     = new Database();
+    private Highscore                                   highscore    = new Highscore();
 
     private Server() {
         // Load database and highscore
-        /*
-         * try { Jaxser jaxser = new Jaxser(); this.database =
-         * (Database)jaxser.fromXML(new
-         * FileInputStream(ShutdownThread.DATABASE_FILE)); this.highscore =
-         * (Highscore)jaxser.fromXML(new
-         * FileInputStream(ShutdownThread.HIGHSCORE_FILE)); } catch (Exception
-         * ex) { this.database = new Database(); this.highscore = new
-         * Highscore(); System.out.println(ex.getLocalizedMessage());
-         * System.out.println("No persistent database/highscore found!"); }
-         */// FIXME
+        Kryo kryo = new Kryo();
+        try {
+            Input input = new Input(new FileInputStream(
+                    ShutdownThread.DATABASE_FILE));
+            this.database = kryo.readObject(input, Database.class);
+
+            input = new Input(
+                    new FileInputStream(ShutdownThread.HIGHSCORE_FILE));
+            this.highscore = kryo.readObject(input, Highscore.class);
+        } catch (IOException ex) {
+            System.out.println(ex.getLocalizedMessage());
+            System.out.println("No persistent database/highscore found!");
+        }
 
         Thread mainLoop = new ServerLoop(this);
         mainLoop.setDaemon(true);

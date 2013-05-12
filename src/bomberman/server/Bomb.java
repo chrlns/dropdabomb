@@ -1,6 +1,6 @@
 /*
- *  KC Bomberman
- *  Copyright (C) 2008,2009 Christian Lins <christian.lins@web.de>
+ *  DropDaBomb
+ *  Copyright (C) 2008-2013 Christian Lins <christian@lins.me>
  *  Copyright (C) 2008 Kai Ritterbusch <kai.ritterbusch@googlemail.com>
  * 
  *  This program is free software: you can redistribute it and/or modify
@@ -16,71 +16,77 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package bomberman.server;
 
-import bomberman.server.api.Explodable;
-import bomberman.server.api.Element;
 import java.io.Serializable;
+
+import bomberman.server.api.Element;
+import bomberman.server.api.Explodable;
 
 /**
  * The BOMB!
+ * 
  * @author Kai Ritterbusch
  * @author Christian Lins
  */
-class Bomb extends Element implements Explodable, Serializable
-{
-  // Transient fields; so they are not serialized
-  private transient Player    player;
-  private transient BombTimer timer;
-  
-  // Serializable fields
-  private int stage = 1;
-  
-  public Bomb(int x, int y, Player player)
-  {
-    super(x, y);
-    this.player = player;
-    
-    timer = new BombTimer(this);
-  }
-  
-  /**
-   * Bomb explodes.
-   */
-  void explode()
-  {
-    try
-    {
-      System.out.println(this + " explodes!");
-      player.bombs.remove(this);
-      player.game.getPlayground().setElement(gridX, gridY, 0, null);
-      timer.cancel();
-      Server.getInstance().notifyExplosion(player.game, gridX, gridY, player.bombDistance);
+class Bomb extends Element implements Explodable, Serializable {
+
+    private static final long   serialVersionUID = -5117720119134439933L;
+
+    // Transient fields; so they are not serialized
+    private transient Player    player;
+    private transient BombTimer timer;
+
+    // Serializable fields
+    private int                 stage            = 1;
+
+    /**
+     * No-arg constructor required for serialization.
+     */
+    protected Bomb() {
+
     }
-    catch(Exception ex)
-    {
-      ex.printStackTrace();
+
+    public Bomb(int x, int y, Player player) {
+        super(x, y);
+        this.player = player;
+
+        timer = new BombTimer(this);
     }
-  }
-  
-  /**
-   * Gets filename of the Image
-   * @return
-   */
-  @Override
-  public String getImageFilename()
-  {
-    return "resource/gfx/bomb/bomb" + stage + ".png";
-  }
-  
-  /**
-   * Updates Playground
-   * @return
-   */
-  int tick()
-  {
-    player.game.forcePlaygroundUpdate();
-    return ++stage;
-  }
+
+    /**
+     * Bomb explodes.
+     */
+    void explode() {
+        try {
+            System.out.println(this + " explodes!");
+            player.bombs.remove(this);
+            player.game.getPlayground().setElement(gridX, gridY, 0, null);
+            timer.cancel();
+            Server.getInstance().notifyExplosion(player.game, gridX, gridY,
+                    player.bombDistance);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    /**
+     * Gets filename of the Image
+     * 
+     * @return
+     */
+    @Override
+    public String getImageFilename() {
+        return "resource/gfx/bomb/bomb" + stage + ".png";
+    }
+
+    /**
+     * Updates Playground
+     * 
+     * @return
+     */
+    int tick() {
+        player.game.forcePlaygroundUpdate();
+        return ++stage;
+    }
 }

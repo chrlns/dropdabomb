@@ -1,7 +1,7 @@
 /*
- *  KC Bomberman
- *  Copyright 2008 Christian Lins <christian.lins@web.de>
- *  Copyright 2008 Kai Ritterbusch <kai.ritterbusch@googlemail.com>
+ *  DropDaBomb
+ *  Copyright (C) 2008-2013 Christian Lins <christian@lins.me>
+ *  Copyright (C) 2008 Kai Ritterbusch <kai.ritterbusch@googlemail.com>
  * 
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -16,28 +16,33 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package bomberman.server;
 
 /**
  * Extra: raise Bombdistance
- * @author Kai Ritterbusch (kai.ritterbusch@fh-osnabrueck.de)
+ * 
+ * @author Kai Ritterbusch
  */
-class ExtraDistance extends Extra
-{
-  public static final String IMAGE_FILENAME = "resource/gfx/extras/bombDistance.png";
-  
-  public ExtraDistance(int x, int y)
-  {
-    super(x,y);
-  }
-  
-   /**
-   * Gets the filename of an Image
-   * @return Filename
-   */
-  public String getImageFilename()
-  {
-    return IMAGE_FILENAME;
-  }
+class ExtraDistance extends Extra {
+
+    private static final long  serialVersionUID = 7243922604140793033L;
+    public static final String IMAGE_FILENAME   = "resource/gfx/extras/bombDistance.png";
+
+    protected ExtraDistance() {
+
+    }
+
+    public ExtraDistance(int x, int y) {
+        super(x, y);
+    }
+
+    /**
+     * Gets the filename of an Image
+     * 
+     * @return Filename
+     */
+    @Override
+    public String getImageFilename() {
+        return IMAGE_FILENAME;
+    }
 }

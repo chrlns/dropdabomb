@@ -1,6 +1,6 @@
 /*
- *  KC Bomberman
- *  Copyright (C) 2008-2009 Christian Lins <cli@openoffice.org>
+ *  DropDaBomb
+ *  Copyright (C) 2008-2013 Christian Lins <christian@lins.me>
  *  Copyright (C) 2008 Kai Ritterbusch <kai.ritterbusch@googlemail.com>
  * 
  *  This program is free software: you can redistribute it and/or modify
@@ -16,109 +16,110 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package bomberman.server;
 
-import bomberman.server.api.Session;
-import bomberman.net.Event;
-import bomberman.server.api.ServerInterface;
-import bomberman.net.EventReceiverBase;
 import java.io.InputStream;
 
+import bomberman.net.Event;
+import bomberman.net.EventReceiverBase;
+import bomberman.server.api.ServerInterface;
+import bomberman.server.api.Session;
+
 /**
- * Handles the InputStream of a Client's socket. In most aspects this class
- * is an adapter to the bloat Server class.
+ * Handles the InputStream of a Client's socket. In most aspects this class is
+ * an adapter to the bloat Server class.
+ * 
  * @author Christian Lins
  */
-class ServerInput extends EventReceiverBase implements ServerInterface 
-{
+class ServerInput extends EventReceiverBase implements ServerInterface {
 
-  private ServerOutput out = null;
-  
-  public ServerInput(InputStream in, ServerOutput out)
-  {
-    super(in);
-    this.out = out;
-  }
-  
-  public void createGame(Event event) 
-  {
-    Session session  = (Session)event.getArguments()[0];
-    String  gameName = (String)event.getArguments()[1];
-    Server.getInstance().createGame(session, gameName);
-  }
+    private ServerOutput out = null;
 
-  public void joinGame(Event event) 
-  {
-    Session session  = (Session)event.getArguments()[0];
-    String  gameName = (String)event.getArguments()[1];
-    Server.getInstance().joinGame(session, gameName);
-  }
+    public ServerInput(InputStream in, ServerOutput out) {
+        super(in);
+        this.out = out;
+    }
 
-  public void joinViewGame(Event event) 
-  {
-    Session session  = (Session)event.getArguments()[0];
-    String  gameName = (String)event.getArguments()[1];
-    Server.getInstance().joinViewGame(session, gameName);
-  }
+    @Override
+    public void createGame(Event event) {
+        Session session = (Session) event.getArguments()[0];
+        String gameName = (String) event.getArguments()[1];
+        Server.getInstance().createGame(session, gameName);
+    }
 
-  public void leaveGame(Event event) 
-  {
-    Session session  = (Session)event.getArguments()[0];
-    Server.getInstance().leaveGame(session);
-  }
+    @Override
+    public void joinGame(Event event) {
+        Session session = (Session) event.getArguments()[0];
+        String gameName = (String) event.getArguments()[1];
+        Server.getInstance().joinGame(session, gameName);
+    }
 
-  public void login1(Event event)
-  {
-    System.out.println("ServerInput.login1(" + event.getArguments()[0] + ")");
-    long challenge = Server.getInstance().login1((String)event.getArguments()[0]);
-    this.out.continueLogin(new Event(new Object[]{challenge}));
-  }
+    @Override
+    public void joinViewGame(Event event) {
+        Session session = (Session) event.getArguments()[0];
+        String gameName = (String) event.getArguments()[1];
+        Server.getInstance().joinViewGame(session, gameName);
+    }
 
-  public void login2(Event event) 
-  {
-    System.out.println("ServerInput.login2()");
-    Server.getInstance().login2(
-            (String)event.getArguments()[0], (Long)event.getArguments()[1], this.out);
-  }
+    @Override
+    public void leaveGame(Event event) {
+        Session session = (Session) event.getArguments()[0];
+        Server.getInstance().leaveGame(session);
+    }
 
-  public void logout(Event event) 
-  {
-    Session session = (Session)event.getArguments()[0];
-    Server.getInstance().logout(session);
-  }
+    @Override
+    public void login1(Event event) {
+        System.out.println("ServerInput.login1(" + event.getArguments()[0]
+                + ")");
+        long challenge = Server.getInstance().login1(
+                (String) event.getArguments()[0]);
+        this.out.continueLogin(new Event(new Object[] { challenge }));
+    }
 
-  public void logoutAll(Event event) 
-  {
-    Server.getInstance().logoutAll();
-  }
+    @Override
+    public void login2(Event event) {
+        System.out.println("ServerInput.login2()");
+        Server.getInstance().login2((String) event.getArguments()[0],
+                (Long) event.getArguments()[1], this.out);
+    }
 
-  public void move(Event event) 
-  {
-    Session session = (Session)event.getArguments()[0];
-    int     x       = (Integer)event.getArguments()[1];
-    int     y       = (Integer)event.getArguments()[2];
-    Server.getInstance().move(session, x, y);
-  }
+    @Override
+    public void logout(Event event) {
+        Session session = (Session) event.getArguments()[0];
+        Server.getInstance().logout(session);
+    }
 
-  public void placeBomb(Event event) 
-  {
-    Session session = (Session)event.getArguments()[0];
-    Server.getInstance().placeBomb(session);
-  }
+    @Override
+    public void logoutAll(Event event) {
+        Server.getInstance().logoutAll();
+    }
 
-  public void sendChatMessage(Event event) 
-  {
-    Session session = (Session)event.getArguments()[0];
-    String  message = (String)event.getArguments()[1];
-    Server.getInstance().sendChatMessage(session, message);
-  }
+    @Override
+    public void move(Event event) {
+        Session session = (Session) event.getArguments()[0];
+        int x = (Integer) event.getArguments()[1];
+        int y = (Integer) event.getArguments()[2];
+        Server.getInstance().move(session, x, y);
+    }
 
-  public void startGame(Event event) 
-  {
-    Session session  = (Session)event.getArguments()[0];
-    String  gameName = (String)event.getArguments()[1];
-    Server.getInstance().startGame(session, gameName);
-  }
+    @Override
+    public void placeBomb(Event event) {
+        Session session = (Session) event.getArguments()[0];
+        Server.getInstance().placeBomb(session);
+    }
+
+    @Override
+    public void sendChatMessage(Event event) {
+        Session session = (Session) event.getArguments()[0];
+        String message = (String) event.getArguments()[1];
+        Server.getInstance().sendChatMessage(session, message);
+    }
+
+    @Override
+    public void startGame(Event event) {
+        Session session = (Session) event.getArguments()[0];
+        String gameName = (String) event.getArguments()[1];
+        Server.getInstance().startGame(session, gameName);
+    }
 
 }

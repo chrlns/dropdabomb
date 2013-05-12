@@ -1,6 +1,6 @@
 /*
- *  KC Bomberman
- *  Copyright (C) 2008,2009 Christian Lins <cli@openoffice.org>
+ *  DropDaBomb
+ *  Copyright (C) 2008-2013 Christian Lins <christian@lins.me>
  *  Copyright (C) 2008 Kai Ritterbusch <kai.ritterbusch@googlemail.com>
  * 
  *  This program is free software: you can redistribute it and/or modify
@@ -16,45 +16,42 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package bomberman.client.gui;
 
 /**
- * Subclass of AnimationTimer. Implements the Explosion Animation,
+ * Subclass of AnimationTimer. Implements the explosion animation.
+ * 
  * @author Christian Lins
  */
-class ExplosionTimer extends AnimationTimer
-{
+class ExplosionTimer extends AnimationTimer {
 
-  private int calls = 0;
-  
-  public ExplosionTimer(ElementPainter painter, int delay, int period)
-  {
-    super(painter, delay, period);
-  }
-  
-  /**
-   * Cancel Timer
-   * @return
-   */
-  @Override
-  public boolean cancel()
-  {
-    this.timer.cancel();
-    return super.cancel();
-  }
+    private int calls = 0;
 
-  /**
-   * Run the Animation
-   */
-  @Override
-  public void run()
-  {
-    if(calls++ > 5)
-      cancel();
-    
-    painter.nextExplosionImage();
-    painter.repaint();
-  }
+    public ExplosionTimer(ElementPainter painter, int delay, int period) {
+        super(painter, delay, period);
+    }
+
+    /**
+     * Cancel Timer
+     * 
+     * @return
+     */
+    @Override
+    public boolean cancel() {
+        this.timer.cancel();
+        return super.cancel();
+    }
+
+    /**
+     * Run the Animation
+     */
+    @Override
+    public void run() {
+        if (calls++ > 5)
+            cancel();
+
+        painter.nextExplosionImage();
+        painter.repaint();
+    }
 
 }

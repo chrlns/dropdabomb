@@ -22,69 +22,75 @@ package bomberman.server.api;
 import java.io.Serializable;
 
 /**
- * Contains the information for one Game. This class is used to update
- * clients with new game information.
- * This class capsulates all necessary information for the client about
- * a @see{Game}. To transmit a full Game class instance would be a lot of
- * overhead and a potential security leak.
- * @author Christian Lins (christian.lins@web.de)
+ * Contains the information for one Game. This class is used to update clients
+ * with new game information. This class capsulates all necessary information
+ * for the client about a @see{Game}. To transmit a full Game class instance
+ * would be a lot of overhead and a potential security leak.
+ * 
+ * @author Christian Lins
  */
-public class GameInfo implements Serializable
-{          
-  private String gameName     = null;
-  private String creator      = null;
-  private String status       = null;
-  private String playerCount  = null;
-  
-  /**
-   * Constructs a new GameInfo using the given parameters.
-   * @param gameName
-   * @param creator
-   * @param isRunning
-   * @param playerCount
-   */
-  public GameInfo(String gameName, String creator, boolean isRunning, int playerCount)
-  {
-    this.gameName = gameName;
-    this.creator  = creator;
-    
-    if(isRunning)
-      this.status = "Gestartet";
-    else
-      this.status = "Warten...";
-    
-    this.playerCount = playerCount + "/4";
-  }
-  
-  /**
-   * @return Name of the game.
-   */
-  public String getName()
-  {
-    return this.gameName;
-  }
-  
-  /**
-   * @return Creator of the game.
-   */
-  public String getCreator()
-  {
-    return this.creator;
-  }
-  
-  /**
-   * @return Status of the game.
-   */
-  public String getStatus()
-  {
-    return this.status;
-  }
+public class GameInfo implements Serializable {
 
-  /**
-   * @return Number of players that have joined the game.
-   */
-  public String getPlayerCount()
-  {
-    return this.playerCount;
-  }
+    private static final long serialVersionUID = -5760989736155351368L;
+
+    private String            gameName         = null;
+    private String            creator          = null;
+    private String            status           = null;
+    private String            playerCount      = null;
+
+    /**
+     * No-arg constructor required for serialization.
+     */
+    protected GameInfo() {
+
+    }
+
+    /**
+     * Constructs a new GameInfo using the given parameters.
+     * 
+     * @param gameName
+     * @param creator
+     * @param isRunning
+     * @param playerCount
+     */
+    public GameInfo(String gameName, String creator, boolean isRunning,
+            int playerCount) {
+        this.gameName = gameName;
+        this.creator = creator;
+
+        if (isRunning)
+            this.status = "Gestartet";
+        else
+            this.status = "Warten...";
+
+        this.playerCount = playerCount + "/4";
+    }
+
+    /**
+     * @return Name of the game.
+     */
+    public String getName() {
+        return this.gameName;
+    }
+
+    /**
+     * @return Creator of the game.
+     */
+    public String getCreator() {
+        return this.creator;
+    }
+
+    /**
+     * @return Status of the game.
+     */
+    public String getStatus() {
+        return this.status;
+    }
+
+    /**
+     * @return Number of players that have joined the game.
+     */
+    public String getPlayerCount() {
+        return this.playerCount;
+    }
 }

@@ -1,7 +1,7 @@
 /*
- *  KC Bomberman
- *  Copyright 2008 Christian Lins <christian.lins@web.de>
- *  Copyright 2008 Kai Ritterbusch <kai.ritterbusch@googlemail.com>
+ *  DropDaBomb
+ *  Copyright (C) 2008-2013 Christian Lins <christian@lins.me>
+ *  Copyright (C) 2008 Kai Ritterbusch <kai.ritterbusch@googlemail.com>
  * 
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -16,7 +16,6 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package bomberman.server;
 
 import bomberman.server.api.Element;
@@ -24,12 +23,17 @@ import bomberman.server.api.Explodable;
 
 /**
  * An collectable Extra.
- * @author Kai Ritterbusch (kai.ritterbusch@fh-osnabrueck.de)
+ * 
+ * @author Kai Ritterbusch
  */
-abstract class Extra extends Element implements Explodable
-{ 
-  public Extra(int x, int y)
-  {
-    super(x, y);
-  }
+@SuppressWarnings("serial")
+abstract class Extra extends Element implements Explodable {
+
+    protected Extra() {
+
+    }
+
+    public Extra(int x, int y) {
+        super(x, y);
+    }
 }
