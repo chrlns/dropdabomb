@@ -1,3 +1,4 @@
 Manifest-Version: 1.0
-Main-Class: bomberman.Main
+Main-Class: me.lins.dropdabomb.Main
+Class-Path: libs/kryo-2.21-all.jar libs/swing-layout-1.0.4.jar
 
