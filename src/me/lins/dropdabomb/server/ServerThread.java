@@ -33,6 +33,8 @@ import me.lins.dropdabomb.server.api.ServerInterface;
  */
 public class ServerThread extends Thread {
 
+    protected boolean running = false;
+
     public ServerThread(boolean daemon) {
         super("ServerThread");
         setDaemon(daemon);
@@ -66,35 +68,39 @@ public class ServerThread extends Thread {
             ServerSocket ssocket = new ServerSocket(
                     ServerInterface.DEFAULT_PORT);
 
-            System.out.println("Bomberman Server running ...");
+            System.out.println("DropDaBomb Server running ...");
+            this.running = true;
 
             // Wait for incoming connections
-            for (;;) {
+            while (running) {
                 Socket socket = ssocket.accept();
                 ServerOutput output = new ServerOutput(socket.getOutputStream());
                 ServerInput input = new ServerInput(socket.getInputStream(),
                         output);
                 input.start();
             }
+
+            ssocket.close();
         } catch (Exception ex) {
             if (ex.getCause() instanceof BindException) {
                 System.out.println(ex.getLocalizedMessage());
-                System.out.println("Server/Registry already running?");
+                System.out.println("Server already running?");
 
                 if (isDaemon()) {
                     JOptionPane.showMessageDialog(null,
-                            "Port ist belegt. Server schon am Laufen?",
-                            "KCBomberman", JOptionPane.WARNING_MESSAGE);
+                            "Port is in use. Server already running?",
+                            "DropDaBomb", JOptionPane.WARNING_MESSAGE);
                 }
-            } else
+            } else {
                 ex.printStackTrace();
+            }
 
             System.exit(1);
         }
     }
 
     /**
-     * Stops and exits this thread. Hopefully, this method is threaf-safe
+     * Stops and exits this thread. Hopefully, this method is thread-safe
      * otherwise we could have used the Thread.stop() method which is deprecated
      * for this reason.
      */

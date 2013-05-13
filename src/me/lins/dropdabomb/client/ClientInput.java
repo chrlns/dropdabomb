@@ -18,6 +18,7 @@
  */
 package me.lins.dropdabomb.client;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,11 +74,13 @@ public class ClientInput extends EventReceiverBase implements
         int y = (Integer) event.getArguments()[1];
         int distance = (Integer) event.getArguments()[2];
 
-        AudioThread.playSound(Resource.getAsURL("resource/sfx/explosion.wav"));
+        AudioThread.playSound(Resource.getAsURL("res/sfx/explosion.wav"));
 
-        PlaygroundPanel pp = (PlaygroundPanel) MainFrame.getInstance()
-                .getContentPane();
-        pp.drawExplosion(x, y, distance);
+        if (MainFrame.getInstance().getContentPane() instanceof PlaygroundPanel) {
+            PlaygroundPanel pp = (PlaygroundPanel) MainFrame.getInstance()
+                    .getContentPane();
+            pp.drawExplosion(x, y, distance);
+        }
     }
 
     /**
@@ -135,16 +138,16 @@ public class ClientInput extends EventReceiverBase implements
         this.gameStoppedMessage = null;
 
         switch (condition) {
-        case 1: {
-            this.gameStoppedMessage = "Spiel wurde vom Admin beendet!";
-            break;
-        }
-        case 2: {
-            this.gameStoppedMessage = "Hurra! Du hast gewonnen!";
-            break;
-        }
-        default:
-            this.gameStoppedMessage = null;
+            case 1: {
+                this.gameStoppedMessage = "Spiel wurde vom Admin beendet!";
+                break;
+            }
+            case 2: {
+                this.gameStoppedMessage = "Hurra! Du hast gewonnen!";
+                break;
+            }
+            default:
+                this.gameStoppedMessage = null;
         }
 
         // Change Window
@@ -215,6 +218,11 @@ public class ClientInput extends EventReceiverBase implements
     public void loggedOut(Event event) {
         MainFrame.getInstance().setVisible(false);
 
+        try {
+            ClientThread.getInstance().disconnect();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         ClientThread.getInstance().Session = null;
         ClientThread.getInstance().Server = null;
     }

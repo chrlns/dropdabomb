@@ -37,7 +37,6 @@ import me.lins.dropdabomb.server.gui.ServerControlPanel;
 import me.lins.dropdabomb.server.gui.UserListTableModel;
 import me.lins.dropdabomb.util.CHAP;
 
-
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 
@@ -130,9 +129,9 @@ public class Server {
         // Log-Message
         if (ServerControlPanel.getInstance() != null) {
             ServerControlPanel.getInstance().addLogMessages(
-                    "ServerInstanz erstellt");
+                    "Server instance created.");
         }
-        System.out.println("ServerInstanz erstellt");
+        System.out.println("Server instance created.");
     }
 
     /**
@@ -709,13 +708,11 @@ public class Server {
         {
             return false;
         } else {
-            System.out.println("Spiel vorhanden ok");
             Game game = this.games.get(gameName);
 
             // Check if the client is the creator of the game,
             // say it is allowed to start the game
             if (game.getCreator().equals(session)) {
-                System.out.println("Creator ok");
                 // Send game start message
                 List<Session> sessions = game.getPlayerSessions();
                 List<Session> specSessions = game.getSpectatorSessions();
@@ -737,8 +734,8 @@ public class Server {
                 game.addAI();
                 game.setRunning(true);
 
-                // Notify all other clients that this game has startet,
-                // but do not send notifies to clients that are currently
+                // Notify all other clients that this game has started,
+                // but do not send notifications to clients that are currently
                 // playing
                 gameListUpdate();
 

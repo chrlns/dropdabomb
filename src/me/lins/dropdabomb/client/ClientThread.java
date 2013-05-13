@@ -27,7 +27,6 @@ import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.rmi.ConnectException;
 
 import me.lins.dropdabomb.client.gui.MainFrame;
 import me.lins.dropdabomb.server.api.ServerInterface;
@@ -57,25 +56,32 @@ public class ClientThread extends Thread {
     public ClientInput     ServerListener;
     public Session         Session;
 
-    private String         hostname = "localhost";
-    private int            port     = ServerInterface.DEFAULT_PORT;
+    protected String       hostname = "localhost";
+    protected int          port     = ServerInterface.DEFAULT_PORT;
+    protected Socket       socket;
 
     private ClientThread() {
     }
 
-    public void connect(String hostname) throws ConnectException, IOException,
+    public void connect(String hostname) throws IOException,
             UnknownHostException {
         String[] hp = hostname.split(":");
-        if (hp[0].length() > 0)
+        if (hp[0].length() > 0) {
             this.hostname = hp[0];
-        if (hp.length > 1)
+        }
+        if (hp.length > 1) {
             this.port = Integer.parseInt(hp[1]);
+        }
 
         // Connect to server
-        Socket socket = new Socket(this.hostname, this.port);
+        this.socket = new Socket(this.hostname, this.port);
         Server = new ClientOutput(socket.getOutputStream());
         ServerListener = new ClientInput(socket.getInputStream());
         ServerListener.start();
+    }
+
+    public void disconnect() throws IOException {
+        this.socket.close();
     }
 
     @Override

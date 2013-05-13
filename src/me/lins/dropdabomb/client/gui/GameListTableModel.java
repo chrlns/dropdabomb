@@ -18,15 +18,11 @@
  */
 package me.lins.dropdabomb.client.gui;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import javax.swing.Icon;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -170,7 +166,7 @@ public class GameListTableModel extends AbstractTableModel {
      * 
      * @return
      */
-    public List getRows() {
+    public List<?> getRows() {
         return data;
     }
 
@@ -185,64 +181,6 @@ public class GameListTableModel extends AbstractTableModel {
     }
 
     /**
-     * Sets Icon for sortState
-     * 
-     * @param col
-     * @return
-     */
-    private Icon createAscendingIcon(int col) {
-        sortColumnDesc[col] = false;
-        return new Icon() {
-            @Override
-            public int getIconHeight() {
-                return 3;
-            }
-
-            @Override
-            public int getIconWidth() {
-                return 5;
-            }
-
-            @Override
-            public void paintIcon(Component c, Graphics g, int x, int y) {
-                g.setColor(Color.BLACK);
-                g.drawLine(x, y, x + 4, y);
-                g.drawLine(x + 1, y + 1, x + 3, y + 1);
-                g.drawLine(x + 2, y + 2, x + 2, y + 2);
-            }
-        };
-    }
-
-    /**
-     * Creates Sort-Icon
-     * 
-     * @param col
-     * @return
-     */
-    private Icon createDescendingIcon(int col) {
-        sortColumnDesc[col] = true;
-        return new Icon() {
-            @Override
-            public int getIconHeight() {
-                return 3;
-            }
-
-            @Override
-            public int getIconWidth() {
-                return 5;
-            }
-
-            @Override
-            public void paintIcon(Component c, Graphics g, int x, int y) {
-                g.setColor(Color.BLACK);
-                g.drawLine(x, y + 2, x + 4, y + 2);
-                g.drawLine(x + 1, y + 1, x + 3, y + 1);
-                g.drawLine(x + 2, y, x + 2, y);
-            }
-        };
-    }
-
-    /**
      * Sort Table column
      * 
      * @param col
@@ -250,9 +188,10 @@ public class GameListTableModel extends AbstractTableModel {
     public void sortByColumn(final int col) {
         if (data.size() == 0)
             return;
-        Collections.sort(data, new Comparator<List>() {
+        Collections.sort(data, new Comparator<List<?>>() {
+            @SuppressWarnings({ "rawtypes", "unchecked" })
             @Override
-            public int compare(List v1, List v2) {
+            public int compare(List<?> v1, List<?> v2) {
                 int size1 = v1.size();
                 if (col >= size1)
                     throw new IllegalArgumentException("Out of Bounds");

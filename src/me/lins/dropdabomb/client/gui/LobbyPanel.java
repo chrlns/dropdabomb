@@ -24,7 +24,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
-import java.util.Vector;
 
 import javax.swing.JOptionPane;
 import javax.swing.text.Document;
@@ -63,7 +62,7 @@ public class LobbyPanel extends javax.swing.JPanel {
             public void mousePressed(MouseEvent evt) {
                 activeCol = tblGamelist.columnAtPoint(evt.getPoint());
                 ((GameListTableModel) tblGamelist.getModel())
-                        .sortByColumn(tblGamelist.columnAtPoint(evt.getPoint()));
+                        .sortByColumn(activeCol);
 
                 ((GameListTableModel) tblGamelist.getModel())
                         .fireTableDataChanged();
@@ -91,7 +90,7 @@ public class LobbyPanel extends javax.swing.JPanel {
         txtChatInput = new javax.swing.JTextField();
         btnChat = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        lstUser = new javax.swing.JList();
+        lstUser = new javax.swing.JList<String>();
         lblUserlist = new javax.swing.JLabel();
         btnCreateGame = new javax.swing.JButton();
         btnJoinGame = new javax.swing.JButton();
@@ -346,22 +345,22 @@ public class LobbyPanel extends javax.swing.JPanel {
     }// GEN-LAST:event_btnSpectateGameActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton     btnChat;
-    private javax.swing.JButton     btnCreateGame;
-    private javax.swing.JButton     btnJoinGame;
-    private javax.swing.JButton     btnSpectateGame;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel      lblChatWindow;
-    private javax.swing.JLabel      lblGamelist;
-    private javax.swing.JLabel      lblLobbyInfo;
-    private javax.swing.JLabel      lblLobbyTitle;
-    private javax.swing.JLabel      lblUserlist;
-    private javax.swing.JList       lstUser;
-    private javax.swing.JTable      tblGamelist;
-    private javax.swing.JTextPane   txtChat;
-    private javax.swing.JTextField  txtChatInput;
+    private javax.swing.JButton       btnChat;
+    private javax.swing.JButton       btnCreateGame;
+    private javax.swing.JButton       btnJoinGame;
+    private javax.swing.JButton       btnSpectateGame;
+    private javax.swing.JScrollPane   jScrollPane1;
+    private javax.swing.JScrollPane   jScrollPane2;
+    private javax.swing.JScrollPane   jScrollPane3;
+    private javax.swing.JLabel        lblChatWindow;
+    private javax.swing.JLabel        lblGamelist;
+    private javax.swing.JLabel        lblLobbyInfo;
+    private javax.swing.JLabel        lblLobbyTitle;
+    private javax.swing.JLabel        lblUserlist;
+    private javax.swing.JList<String> lstUser;
+    private javax.swing.JTable        tblGamelist;
+    private javax.swing.JTextPane     txtChat;
+    private javax.swing.JTextField    txtChatInput;
 
     // End of variables declaration//GEN-END:variables
 
@@ -390,7 +389,7 @@ public class LobbyPanel extends javax.swing.JPanel {
      * @param users
      */
     public void setUserList(List<String> users) {
-        lstUser.setListData(new Vector<Object>(users));
+        lstUser.setListData(users.toArray(new String[0]));
     }
 
     /**

@@ -77,8 +77,6 @@ public class LoginPanel extends javax.swing.JPanel {
         txtServer = new javax.swing.JTextField();
         lblServer = new javax.swing.JLabel();
 
-        setNextFocusableComponent(txtNickname);
-
         lblNickname.setForeground(java.awt.Color.white);
         lblNickname.setText("Spielername:");
 
@@ -232,10 +230,10 @@ public class LoginPanel extends javax.swing.JPanel {
 
     public void continueLogin(long challenge) {
         String nickname = this.txtNickname.getText();
-        String password = this.txtPassword.getText();
+        String password = new String(this.txtPassword.getPassword());
         long hash = CHAP.createChecksum(challenge, password);
 
-        // The Client request a login
+        // The client requests a login
         ClientThread.getInstance().Server.login2(new Event(new Object[] {
                 nickname, hash }));
     }

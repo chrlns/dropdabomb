@@ -18,10 +18,14 @@
  */
 package me.lins.dropdabomb.server;
 
+import java.io.FileOutputStream;
+
+import com.esotericsoftware.kryo.Kryo;
+import com.esotericsoftware.kryo.io.Output;
+
 /**
  * Stores the persistent data of the Server. This thread is executed when the VM
- * stops. Due to security restrictions this is not done on the Java WebStart
- * edition of KC Bomberman.
+ * stops.
  * 
  * @author Christian Lins
  */
@@ -29,6 +33,7 @@ class ShutdownThread extends Thread {
 
     public static final String DATABASE_FILE  = "database.po";
     public static final String HIGHSCORE_FILE = "highscore.po";
+
     private Database           database       = null;
     private Highscore          highscore      = null;
 
@@ -42,6 +47,20 @@ class ShutdownThread extends Thread {
      */
     @Override
     public void run() {
+        try {
+            Kryo kryo = new Kryo();
 
+            Output out = new Output(new FileOutputStream(DATABASE_FILE));
+            kryo.writeObject(out, database);
+            out.flush();
+            out.close();
+
+            out = new Output(new FileOutputStream(HIGHSCORE_FILE));
+            kryo.writeObject(out, highscore);
+            out.flush();
+            out.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }

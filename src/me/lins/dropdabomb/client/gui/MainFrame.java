@@ -31,7 +31,6 @@ import me.lins.dropdabomb.client.ClientThread;
 import me.lins.dropdabomb.client.io.Resource;
 import me.lins.dropdabomb.net.Event;
 
-
 /**
  * The main application window.
  * 
@@ -72,7 +71,7 @@ public class MainFrame extends JFrame {
         };
         this.addWindowListener(listener);
 
-        URL sound = Resource.getAsURL("resource/sfx/battle.wav");
+        URL sound = Resource.getAsURL("res/sfx/battle.wav");
         if (sound != null) {
             AudioThread.playSound(sound);
         }
