@@ -1,7 +1,7 @@
 /*
- *  KC Bomberman
- *  Copyright 2008 Christian Lins <christian.lins@web.de>
- *  Copyright 2008 Kai Ritterbusch <kai.ritterbusch@googlemail.com>
+ *  DropDaBomb
+ *  Copyright (C) 2008-2013 Christian Lins <christian@lins.me>
+ *  Copyright (C) 2008 Kai Ritterbusch <kai.ritterbusch@googlemail.com>
  * 
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -16,7 +16,6 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package me.lins.dropdabomb.server.gui;
 
 import javax.swing.JFrame;
@@ -25,15 +24,15 @@ import me.lins.dropdabomb.server.ServerThread;
 
 /**
  * ServerFrame allows the user to control the Bomberman Server.
- * @author Christian Lins (christian.lins@web.de)
+ * 
+ * @author Christian Lins
  */
-public class ServerFrame extends JFrame
-{
-  public ServerFrame(ServerThread thread)
-  {
-    setContentPane(new ServerControlPanel(thread));
-    setSize(600, 450);
-    setDefaultCloseOperation(EXIT_ON_CLOSE);
-    setTitle("KC Bomberman Server Kontrolle");
-  }
+@SuppressWarnings("serial")
+public class ServerFrame extends JFrame {
+    public ServerFrame(ServerThread thread) {
+        setContentPane(new ServerControlPanel(thread));
+        setSize(600, 450);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setTitle("DropDaBomb Server Control Panel");
+    }
 }

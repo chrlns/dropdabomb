@@ -1,6 +1,6 @@
 /*
- *  KC Bomberman
- *  Copyright (C) 2008 Christian Lins <christian@lins.me>
+ *  DropDaBomb
+ *  Copyright (C) 2008-2013 Christian Lins <christian@lins.me>
  *  Copyright (C) 2008 Kai Ritterbusch <kai.ritterbusch@googlemail.com>
  * 
  *  This program is free software: you can redistribute it and/or modify

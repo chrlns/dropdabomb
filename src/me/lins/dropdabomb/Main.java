@@ -16,7 +16,6 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package me.lins.dropdabomb;
 
 import me.lins.dropdabomb.client.ClientThread;
@@ -33,16 +32,19 @@ public class Main {
     public static boolean Debugging = false;
 
     public static void main(String[] args) throws Exception {
-        /** Should we show the Server GUI? */
+        if (args.length == 0) {
+            printArguments();
+            return;
+        }
+
+        // Should we show the Server GUI?
         boolean headlessServer = false;
 
-        /** Should we start a Server? */
+        // Should we start a Server?
         boolean startServer = false;
 
-        /** Should we start a Client? */
+        // Should we start a Client?
         boolean startClient = false;
-
-        String hostname = null;
 
         for (int n = 0; n < args.length; n++) {
             if (args[n].equals("--client")) {
@@ -53,8 +55,6 @@ public class Main {
                 headlessServer = true;
             } else if (args[n].equals("--server")) {
                 startServer = true;
-            } else if (args[n].equals("-h") || args[n].equals("--hostname")) {
-                hostname = args[n + 1];
             }
         }
 
@@ -69,13 +69,23 @@ public class Main {
             if (!headlessServer) {
                 new ServerFrame(serverThread).setVisible(true);
                 ServerControlPanel.getInstance().addLogMessages(
-                        "Bombermanserver bereit ...");
+                        "Server ready...");
             }
 
             synchronized (serverThread) {
                 serverThread.wait();
             }
         }
+    }
 
+    private static void printArguments() {
+        System.out.println("Options:");
+        System.out.println(" --client\tStart the Client GUI");
+        System.out
+                .println(" --server\tStart the Game server (including its GUI)");
+        System.out.println(" --headless\tSuppress the Server GUI");
+        System.out.println("All options can be used in conjunction, e.g.");
+        System.out.println("\tdropdabomb --client --server --headless");
+        System.out.println("starts the game in single player mode.");
     }
 }

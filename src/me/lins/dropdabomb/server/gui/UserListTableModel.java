@@ -1,7 +1,7 @@
 /*
- *  KC Bomberman
- *  Copyright 2008 Christian Lins <christian.lins@web.de>
- *  Copyright 2008 Kai Ritterbusch <kai.ritterbusch@googlemail.com>
+ *  DropDaBomb
+ *  Copyright (C) 2008-2013 Christian Lins <christian@lins.me>
+ *  Copyright (C) 2008 Kai Ritterbusch <kai.ritterbusch@googlemail.com>
  * 
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -16,7 +16,6 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package me.lins.dropdabomb.server.gui;
 
 import java.awt.Color;
@@ -35,9 +34,13 @@ import javax.swing.table.AbstractTableModel;
  * @author <a href="kai.ritterbusch@fh-osnabrueck.de">Kai Ritterbusch</a>
  */
 public class UserListTableModel extends AbstractTableModel {
-    private final String[]               columnNames = { "Username", "Status" };          // Spaltennamen
-    private ArrayList<ArrayList<Object>> data        = new ArrayList<ArrayList<Object>>(); // Daten
-    private final boolean[]              sortColumnDesc;                                  // Sortierungsstatus
+
+    private static final long            serialVersionUID = 469656393754490310L;
+
+    private final String[]               columnNames      = { "Username",
+            "Status"                                     };                                   // Spaltennamen
+    private ArrayList<ArrayList<Object>> data             = new ArrayList<ArrayList<Object>>(); // Daten
+    private final boolean[]              sortColumnDesc;                                       // Sortierungsstatus
 
     public UserListTableModel() {
         this.sortColumnDesc = new boolean[columnNames.length];

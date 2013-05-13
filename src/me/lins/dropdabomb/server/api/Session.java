@@ -1,6 +1,6 @@
 /*
- *  KC Bomberman
- *  Copyright (C) 2008,2009 Christian Lins <cli@openoffice.org>
+ *  DropDaBomb
+ *  Copyright (C) 2008-2013 Christian Lins <christian@lins.me>
  *  Copyright (C) 2008 Kai Ritterbusch <kai.ritterbusch@googlemail.com>
  * 
  *  This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,6 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package me.lins.dropdabomb.server.api;
 
 import java.io.Serializable;
@@ -24,50 +23,48 @@ import java.util.Random;
 
 /**
  * Creates randomized Session.
+ * 
  * @author Kai Ritterbusch
  * @author Christian Lins
  */
-public class Session implements Serializable
-{
-  static long serialVersionUID = 103984384;
-  
-  private int sessionID;
-  private int hashCode;
-    
-  public Session()
-  {
-    Random rn = new Random();
-    this.sessionID = rn.nextInt();
-       
-    this.hashCode = rn.nextInt();
-  }
+public class Session implements Serializable {
 
-  /**
-   * It is necessary to override this method that instance recognition
-   * works over VM borders.
-   */
-  @Override
-  public boolean equals(Object obj)
-  {
-    return hashCode() == obj.hashCode();
-  }
-  
-  /**
-   * @return The Session ID.
-   */
-  public int getID()
-  {
-    return this.sessionID;
-  }      
+    private static final long serialVersionUID = -1207981957932084719L;
 
-  /**
-   * It is necessary to override this method that instance recognition
-   * works over VM borders.
-   * @return
-   */
-  @Override
-  public int hashCode() 
-  {
-    return this.hashCode; 
-  }
+    private final int         sessionID;
+    private final int         hashCode;
+
+    public Session() {
+        Random rn = new Random();
+        this.sessionID = rn.nextInt();
+
+        this.hashCode = rn.nextInt();
+    }
+
+    /**
+     * It is necessary to override this method that instance recognition works
+     * over VM borders.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        return hashCode() == obj.hashCode();
+    }
+
+    /**
+     * @return The Session ID.
+     */
+    public int getID() {
+        return this.sessionID;
+    }
+
+    /**
+     * It is necessary to override this method that instance recognition works
+     * over VM borders.
+     * 
+     * @return
+     */
+    @Override
+    public int hashCode() {
+        return this.hashCode;
+    }
 }

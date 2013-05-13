@@ -42,7 +42,9 @@ import org.jdesktop.layout.LayoutStyle;
  * @author Kai Ritterbusch
  * @author Christian Lins
  */
+@SuppressWarnings("serial")
 public class LobbyPanel extends javax.swing.JPanel {
+
     private int activeCol = 0; // last sorted Column
 
     public LobbyPanel() {

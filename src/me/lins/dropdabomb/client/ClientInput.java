@@ -38,7 +38,6 @@ import me.lins.dropdabomb.server.Playground;
 import me.lins.dropdabomb.server.api.GameInfo;
 import me.lins.dropdabomb.server.api.Session;
 
-
 /**
  * Callback class for the Server to Client connection.
  * 
@@ -207,10 +206,10 @@ public class ClientInput extends EventReceiverBase implements
     }
 
     /**
-     * Notifies the Client that he was logged out. Shows the StartPanel
+     * Notifies the Client that he was logged out. Shows the StartPanel.
      * 
      * @param event
-     *            Ignored
+     *            Not used.
      */
     @Override
     public void loggedOut(Event event) {
@@ -218,12 +217,10 @@ public class ClientInput extends EventReceiverBase implements
 
         ClientThread.getInstance().Session = null;
         ClientThread.getInstance().Server = null;
-
-        // new ClientThread(RMIClientSocketFactoryImpl.ServerHost).start();
     }
 
     /**
-     * Clientside update of the playground
+     * Client side update of the playground.
      */
     @Override
     public void playgroundUpdate(Event event) {
@@ -239,6 +236,7 @@ public class ClientInput extends EventReceiverBase implements
      */
     @Override
     public void userListUpdate(Event event) {
+        @SuppressWarnings("unchecked")
         List<String> users = (List<String>) event.getArguments()[0];
         LobbyPanel lobby = MainFrame.getInstance().getLobbyPanel();
         lobby.setUserList(users);
@@ -253,7 +251,7 @@ public class ClientInput extends EventReceiverBase implements
         int x = (Integer) event.getArguments()[0];
         int y = (Integer) event.getArguments()[1];
         int playerNumber = (Integer) event.getArguments()[2];
-        AudioThread.playSound(Resource.getAsURL("resource/sfx/scream.wav"));
+        AudioThread.playSound(Resource.getAsURL("res/sfx/scream.wav"));
 
         PlaygroundPanel pp = (PlaygroundPanel) MainFrame.getInstance()
                 .getContentPane();
@@ -279,7 +277,7 @@ public class ClientInput extends EventReceiverBase implements
             @Override
             public void run() {
                 JOptionPane.showMessageDialog(MainFrame.getInstance(),
-                        "Leider verloren!", "Game over",
+                        "You lost!", "Game over",
                         JOptionPane.INFORMATION_MESSAGE);
                 MainFrame.getInstance().setContentPane(
                         MainFrame.getInstance().getLobbyPanel());

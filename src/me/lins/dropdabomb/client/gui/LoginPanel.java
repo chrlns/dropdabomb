@@ -29,13 +29,13 @@ import me.lins.dropdabomb.client.ClientThread;
 import me.lins.dropdabomb.net.Event;
 import me.lins.dropdabomb.util.CHAP;
 
-
 /**
- * Shows the loginPanel when game has started
+ * Shows the LoginPanel when application is started.
  * 
  * @author Kai Ritterbusch
  * @author Christian Lins
  */
+@SuppressWarnings("serial")
 public class LoginPanel extends javax.swing.JPanel {
 
     private static volatile LoginPanel instance = null;

@@ -88,22 +88,28 @@ public class Player extends Element implements Explodable {
         String addition = "";
 
         switch (lastMoveDirection) {
-        case UP: {
-            addition = "1";
-            break;
-        }
-        case DOWN: {
-            addition = "6";
-            break;
-        }
-        case LEFT: {
-            addition = "11";
-            break;
-        }
-        case RIGHT: {
-            addition = "16";
-            break;
-        }
+            case UP: {
+                addition = "1";
+                break;
+            }
+            case DOWN: {
+                addition = "6";
+                break;
+            }
+            case LEFT: {
+                addition = "11";
+                break;
+            }
+            case RIGHT: {
+                addition = "16";
+                break;
+            }
+            case EXPLODING:
+                break;
+            case NONE:
+                break;
+            default:
+                break;
         }
 
         imgPath = imgPath + addition + ".png";
