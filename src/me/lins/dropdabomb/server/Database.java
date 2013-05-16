@@ -39,7 +39,7 @@ public class Database implements Serializable {
      * in order to start a WebStart game a default user is important
      */
     public Database() {
-        addUser("gast", "");
+        addUser("guest", "");
     }
 
     /**

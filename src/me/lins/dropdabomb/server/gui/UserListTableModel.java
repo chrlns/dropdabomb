@@ -18,29 +18,25 @@
  */
 package me.lins.dropdabomb.server.gui;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import javax.swing.Icon;
 import javax.swing.table.AbstractTableModel;
 
 /**
  * A custom table model for the user list.
  * 
- * @author <a href="kai.ritterbusch@fh-osnabrueck.de">Kai Ritterbusch</a>
+ * @author <a href="kai.ritterbusch@googlemail.com">Kai Ritterbusch</a>
  */
 public class UserListTableModel extends AbstractTableModel {
 
     private static final long            serialVersionUID = 469656393754490310L;
 
     private final String[]               columnNames      = { "Username",
-            "Status"                                     };                                   // Spaltennamen
-    private ArrayList<ArrayList<Object>> data             = new ArrayList<ArrayList<Object>>(); // Daten
-    private final boolean[]              sortColumnDesc;                                       // Sortierungsstatus
+            "Status"                                     };
+    private ArrayList<ArrayList<Object>> data             = new ArrayList<ArrayList<Object>>();
+    private final boolean[]              sortColumnDesc;
 
     public UserListTableModel() {
         this.sortColumnDesc = new boolean[columnNames.length];
@@ -162,7 +158,7 @@ public class UserListTableModel extends AbstractTableModel {
     /**
      * @return All rows of this table model.
      */
-    public ArrayList getRows() {
+    public ArrayList<ArrayList<Object>> getRows() {
         return data;
     }
 
@@ -177,64 +173,6 @@ public class UserListTableModel extends AbstractTableModel {
     }
 
     /**
-     * Creates a custom ascend sorting icon.
-     * 
-     * @param col
-     * @return
-     */
-    private Icon createAscendingIcon(int col) {
-        sortColumnDesc[col] = false;
-        return new Icon() {
-            @Override
-            public int getIconHeight() {
-                return 3;
-            }
-
-            @Override
-            public int getIconWidth() {
-                return 5;
-            }
-
-            @Override
-            public void paintIcon(Component c, Graphics g, int x, int y) {
-                g.setColor(Color.BLACK);
-                g.drawLine(x, y, x + 4, y);
-                g.drawLine(x + 1, y + 1, x + 3, y + 1);
-                g.drawLine(x + 2, y + 2, x + 2, y + 2);
-            }
-        };
-    }
-
-    /**
-     * Creates a custom descend sorting icon.
-     * 
-     * @param col
-     * @return
-     */
-    private Icon createDescendingIcon(int col) {
-        sortColumnDesc[col] = true;
-        return new Icon() {
-            @Override
-            public int getIconHeight() {
-                return 3;
-            }
-
-            @Override
-            public int getIconWidth() {
-                return 5;
-            }
-
-            @Override
-            public void paintIcon(Component c, Graphics g, int x, int y) {
-                g.setColor(Color.BLACK);
-                g.drawLine(x, y + 2, x + 4, y + 2);
-                g.drawLine(x + 1, y + 1, x + 3, y + 1);
-                g.drawLine(x + 2, y, x + 2, y);
-            }
-        };
-    }
-
-    /**
      * Sort this model by the specified column.
      * 
      * @param col
@@ -243,15 +181,16 @@ public class UserListTableModel extends AbstractTableModel {
         if (data.size() == 0)
             return;
 
-        Collections.sort(data, new Comparator<ArrayList>() {
+        Collections.sort(data, new Comparator<ArrayList<Object>>() {
+            @SuppressWarnings("unchecked")
             @Override
-            public int compare(ArrayList v1, ArrayList v2) {
+            public int compare(ArrayList<Object> v1, ArrayList<Object> v2) {
                 int size1 = v1.size();
                 if (col >= size1)
                     throw new IllegalArgumentException("Out of Bounds");
 
-                Comparable s1 = (Comparable<?>) v1.get(col);
-                Comparable s2 = (Comparable<?>) v2.get(col);
+                Comparable<Object> s1 = (Comparable<Object>) v1.get(col);
+                Comparable<Object> s2 = (Comparable<Object>) v2.get(col);
 
                 int cmp = s1.compareTo(s2);
                 if (sortColumnDesc[col]) {

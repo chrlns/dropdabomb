@@ -19,6 +19,7 @@
 package me.lins.dropdabomb.server.gui;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.JOptionPane;
 
@@ -203,20 +204,23 @@ public class UserFrame extends javax.swing.JFrame {
      * @param evt
      */
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnOkActionPerformed
-        if (txtPw1.getText().equals(txtPw2.getText())) {
+        if (Arrays.equals(txtPw1.getPassword(), txtPw2.getPassword())) {
             ArrayList<Object> user = new ArrayList<Object>();
             user.add(txtUsername.getText());
             user.add("offline");
-            Server.getInstance().getDatabase()
-                    .addUser(txtUsername.getText(), txtPw1.getText());
+            Server.getInstance()
+                    .getDatabase()
+                    .addUser(txtUsername.getText(),
+                            new String(txtPw1.getPassword()));
             ((UserListTableModel) this.parent.getTblUserList().getModel())
                     .addRow(user);
 
             this.setVisible(false);
-        } else
+        } else {
             JOptionPane
                     .showMessageDialog(this,
                             "Das Passwort und die Bestaetigung stimmen nicht ueberein!!");
+        }
     }// GEN-LAST:event_btnOkActionPerformed
 
     private void txtPw2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtPw2ActionPerformed

@@ -92,14 +92,14 @@ public class ServerControlPanel extends javax.swing.JPanel {
      * Adds game to List.
      */
     public void addGame(Game game) {
-        ((DefaultListModel) liGames.getModel()).addElement(game);
+        ((DefaultListModel<Game>) liGames.getModel()).addElement(game);
     }
 
     /**
      * Removes Game from list.
      */
     public void removeGame(Game game) {
-        ((DefaultListModel) liGames.getModel()).removeElement(game);
+        ((DefaultListModel<Game>) liGames.getModel()).removeElement(game);
     }
 
     /**
@@ -138,7 +138,7 @@ public class ServerControlPanel extends javax.swing.JPanel {
         txtLog = new javax.swing.JTextArea();
         tabGames = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        liGames = new javax.swing.JList();
+        liGames = new javax.swing.JList<Game>();
         btnCloseGame = new javax.swing.JButton();
         tabUsers = new javax.swing.JPanel();
         btnKick = new javax.swing.JButton();
@@ -191,7 +191,7 @@ public class ServerControlPanel extends javax.swing.JPanel {
 
         tabbedPane.addTab("Log", tabLog);
 
-        liGames.setModel(new DefaultListModel());
+        liGames.setModel(new DefaultListModel<Game>());
         jScrollPane2.setViewportView(liGames);
 
         btnCloseGame.setText("Beenden");
@@ -448,7 +448,7 @@ public class ServerControlPanel extends javax.swing.JPanel {
                             "offline", i, 1);
 
                 // Clear Game list
-                ((DefaultListModel) liGames.getModel()).clear();
+                ((DefaultListModel<Game>) liGames.getModel()).clear();
 
                 ServerControlPanel.getInstance().addLogMessages(
                         "Bombermanserver gestoppt ...");
@@ -489,7 +489,7 @@ public class ServerControlPanel extends javax.swing.JPanel {
                 return;
             Server.getInstance()
                     .stopGame(liGames.getSelectedValue().toString());
-            ((DefaultListModel) liGames.getModel()).removeElement(liGames
+            ((DefaultListModel<Game>) liGames.getModel()).removeElement(liGames
                     .getSelectedValue());
         } catch (Exception e) {
             e.printStackTrace();
@@ -558,7 +558,7 @@ public class ServerControlPanel extends javax.swing.JPanel {
     private javax.swing.JLabel      lblExportHighscore;
     private javax.swing.JLabel      lblStartServer;
     private javax.swing.JLabel      lblStopServer;
-    private javax.swing.JList       liGames;
+    private javax.swing.JList<Game>       liGames;
     private javax.swing.JScrollPane scrPane;
     private javax.swing.JPanel      tabGames;
     private javax.swing.JPanel      tabLog;
