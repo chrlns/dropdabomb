@@ -139,11 +139,11 @@ public class ClientInput extends EventReceiverBase implements
 
         switch (condition) {
             case 1: {
-                this.gameStoppedMessage = "Spiel wurde vom Admin beendet!";
+                this.gameStoppedMessage = "Game was stopped by the server admin!";
                 break;
             }
             case 2: {
-                this.gameStoppedMessage = "Hurra! Du hast gewonnen!";
+                this.gameStoppedMessage = "Hooray! You won!";
                 break;
             }
             default:

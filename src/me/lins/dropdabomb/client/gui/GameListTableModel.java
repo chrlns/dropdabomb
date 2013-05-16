@@ -33,10 +33,10 @@ import javax.swing.table.AbstractTableModel;
 @SuppressWarnings("serial")
 public class GameListTableModel extends AbstractTableModel {
 
-    private final String[]     columnNames = { "Spielname", "Ersteller",
-            "Spielerzahl", "Status"       };                              // Spaltennamen
-    private List<List<Object>> data        = new ArrayList<List<Object>>(); // Daten
-    private final boolean[]    sortColumnDesc;                             // Sortierungsstatus
+    private final String[]     columnNames = { "Game", "Creator", "# Players",
+            "Status"                      };
+    private List<List<Object>> data        = new ArrayList<List<Object>>();
+    private final boolean[]    sortColumnDesc;
 
     public GameListTableModel() {
         this.sortColumnDesc = new boolean[columnNames.length];

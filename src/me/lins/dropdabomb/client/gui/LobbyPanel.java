@@ -100,14 +100,14 @@ public class LobbyPanel extends javax.swing.JPanel {
         lblLobbyTitle.setText("Lobby");
 
         lblLobbyInfo
-                .setText("Hier kannst Du mit anderen Spielern chatten, ein Spiel erstellen oder einem Spiel beitreten");
+                .setText("Here you can chat with other players, create a game or join one.");
 
-        lblGamelist.setText("Spielliste");
+        lblGamelist.setText("Games");
 
         tblGamelist.setModel(new GameListTableModel());
         jScrollPane1.setViewportView(tblGamelist);
 
-        lblChatWindow.setText("Chatfenster");
+        lblChatWindow.setText("Chat");
 
         txtChat.setEditable(false);
         jScrollPane2.setViewportView(txtChat);
@@ -122,9 +122,9 @@ public class LobbyPanel extends javax.swing.JPanel {
 
         jScrollPane3.setViewportView(lstUser);
 
-        lblUserlist.setText("Userliste");
+        lblUserlist.setText("Users");
 
-        btnCreateGame.setText("Neues Spiel");
+        btnCreateGame.setText("New game");
         btnCreateGame.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,7 +132,7 @@ public class LobbyPanel extends javax.swing.JPanel {
             }
         });
 
-        btnJoinGame.setText("Beitreten");
+        btnJoinGame.setText("Join game");
         btnJoinGame.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,7 +140,7 @@ public class LobbyPanel extends javax.swing.JPanel {
             }
         });
 
-        btnSpectateGame.setText("Beobachter");
+        btnSpectateGame.setText("Spectate game");
         btnSpectateGame.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -294,8 +294,8 @@ public class LobbyPanel extends javax.swing.JPanel {
 
     private void btnCreateGameActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCreateGameActionPerformed
         try {
-            String[] msg = { "Bitte geben Sie einen Namen f\u00FCr das Spiel an!" };
-            String gameName = JOptionPane.showInputDialog(msg, "Neues Spiel");
+            String[] msg = { "Please enter a name for the new game!" };
+            String gameName = JOptionPane.showInputDialog(msg, "New game");
             if (gameName != null) {
                 Session session = ClientThread.getInstance().Session;
                 ClientThread.getInstance().Server.createGame(new Event(
@@ -317,7 +317,7 @@ public class LobbyPanel extends javax.swing.JPanel {
                                 ClientThread.getInstance().Session, name }));
             } else {
                 JOptionPane.showMessageDialog(this,
-                        "Bitte waehle erst ein Spiel!", "Bomberman",
+                        "Please select a game first!", "DropDaBomb",
                         JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception ex) {
@@ -336,7 +336,7 @@ public class LobbyPanel extends javax.swing.JPanel {
                                 ClientThread.getInstance().Session, name }));
             } else {
                 JOptionPane.showMessageDialog(this,
-                        "Bitte waehle erst ein Spiel!", "Bomberman",
+                        "Please select a game first!", "DropDaBomb",
                         JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception ex) {

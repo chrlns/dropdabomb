@@ -78,9 +78,9 @@ public class LoginPanel extends javax.swing.JPanel {
         lblServer = new javax.swing.JLabel();
 
         lblNickname.setForeground(java.awt.Color.white);
-        lblNickname.setText("Spielername:");
+        lblNickname.setText("Player:");
 
-        txtNickname.setText("gast");
+        txtNickname.setText("guest");
 
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -99,7 +99,7 @@ public class LoginPanel extends javax.swing.JPanel {
         });
 
         lblPassword.setForeground(java.awt.Color.white);
-        lblPassword.setText("Passwort:");
+        lblPassword.setText("Password:");
 
         lblServer.setForeground(new java.awt.Color(255, 255, 255));
         lblServer.setText("Server:");

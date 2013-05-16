@@ -39,6 +39,12 @@ public abstract class EventReceiverBase extends Thread {
         this.input = new Input(in);
     }
 
+    /**
+     * Retrieves the method name from event and invokes the appropriate method
+     * at the EventReceiverBase instance (ClientInput or ServerInput).
+     * 
+     * @param event
+     */
     protected void processEvent(Event event) {
         try {
             String methodName = event.getMethodName();

@@ -45,9 +45,10 @@ public class AudioThread extends Thread {
         }
     }
 
-    // The queue has a maximum capacity of Integer.MAX_VALUE, so it will
-    // probably
-    // never block at put operation, but block on take if empty.
+    /*
+     * The queue has a maximum capacity of Integer.MAX_VALUE, so it will
+     * probably never block at put operation, but block on take if empty.
+     */
     private final BlockingQueue<URL> queue = new LinkedBlockingQueue<URL>();
 
     private AudioThread() {
@@ -66,10 +67,11 @@ public class AudioThread extends Thread {
                 AudioClip clip = Applet.newAudioClip(url);
                 clip.play();
 
-                // This is a workaround to prevent multiple clips from starting
-                // at exactly the same time, which causes garbage on some audio
-                // systems.
-                // Increase the sleep time if necessary.
+                /*
+                 * This is a workaround to prevent multiple clips from starting
+                 * at exactly the same time, which causes garbage on some audio
+                 * systems. Increase the sleep time if necessary.
+                 */
                 Thread.sleep(100);
             } catch (Exception ex) {
                 ex.printStackTrace();
