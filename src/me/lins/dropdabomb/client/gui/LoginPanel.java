@@ -199,7 +199,7 @@ public class LoginPanel extends javax.swing.JPanel {
                     new Object[] { nickname }));
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this,
-                    "Login fehlgeschlagen (Server laeuft nicht?)", "Fehler",
+                    "Login failed (Server not running?)", "Error",
                     JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
         }

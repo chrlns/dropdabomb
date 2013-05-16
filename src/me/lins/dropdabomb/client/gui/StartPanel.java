@@ -40,7 +40,7 @@ public class StartPanel extends JPanel {
     private final LoginPanel loginPanel = new LoginPanel();
 
     public StartPanel() {
-        this.background = Resource.getImage("res/gfx/splash.jpg").getImage();
+        this.background = Resource.getImage("res/gfx/splash.png").getImage();
 
         setLayout(null);
         add(loginPanel);
