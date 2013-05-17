@@ -36,7 +36,6 @@ import me.lins.dropdabomb.net.Event;
 import me.lins.dropdabomb.server.Playground;
 import me.lins.dropdabomb.server.api.Element;
 
-
 /**
  * Panel that displays a game's playground. The client receives changes from the
  * server and displays this changes on a PlaygroundPanel.
@@ -158,46 +157,55 @@ public class PlaygroundPanel extends JPanel implements KeyListener {
     @Override
     public void keyPressed(KeyEvent event) {
         try {
-            // do nothing if the calling client is a Spectator
-            if (spectatorStatus == true) {
-                if (event.getKeyCode() == KeyEvent.VK_ESCAPE)
-                    ClientThread.getInstance().ServerListener
-                            .playerLeftGame(new Event(new Object[] {}));
-                return;
-            }
-            switch (event.getKeyCode()) {
-            case KeyEvent.VK_UP: {
-                ClientThread.getInstance().Server.move(new Event(new Object[] {
-                        ClientThread.getInstance().Session, 0, -1 }));
-                break;
-            }
-            case KeyEvent.VK_DOWN: {
-                ClientThread.getInstance().Server.move(new Event(new Object[] {
-                        ClientThread.getInstance().Session, 0, +1 }));
-                break;
-            }
-            case KeyEvent.VK_LEFT: {
-                ClientThread.getInstance().Server.move(new Event(new Object[] {
-                        ClientThread.getInstance().Session, -1, 0 }));
-                break;
-            }
-            case KeyEvent.VK_RIGHT: {
-                ClientThread.getInstance().Server.move(new Event(new Object[] {
-                        ClientThread.getInstance().Session, +1, 0 }));
-                break;
-            }
-            case KeyEvent.VK_SPACE: {
-                ClientThread.getInstance().Server.placeBomb(new Event(
-                        new Object[] { ClientThread.getInstance().Session }));
-                break;
-            }
-            case KeyEvent.VK_ESCAPE: {
+            /*
+             * Do nothing but reacting to ESC if the calling client is a
+             * spectator.
+             */
+            if (event.getKeyCode() == KeyEvent.VK_ESCAPE) {
                 ClientThread.getInstance().Server.leaveGame(new Event(
                         new Object[] { ClientThread.getInstance().Session }));
                 ClientThread.getInstance().ServerListener
                         .playerLeftGame(new Event(new Object[] {}));
-                break;
             }
+
+            if (!spectatorStatus) {
+                switch (event.getKeyCode()) {
+                    case KeyEvent.VK_UP: {
+                        ClientThread.getInstance().Server.move(new Event(
+                                new Object[] {
+                                        ClientThread.getInstance().Session, 0,
+                                        -1 }));
+                        break;
+                    }
+                    case KeyEvent.VK_DOWN: {
+                        ClientThread.getInstance().Server.move(new Event(
+                                new Object[] {
+                                        ClientThread.getInstance().Session, 0,
+                                        +1 }));
+                        break;
+                    }
+                    case KeyEvent.VK_LEFT: {
+                        ClientThread.getInstance().Server.move(new Event(
+                                new Object[] {
+                                        ClientThread.getInstance().Session, -1,
+                                        0 }));
+                        break;
+                    }
+                    case KeyEvent.VK_RIGHT: {
+                        ClientThread.getInstance().Server.move(new Event(
+                                new Object[] {
+                                        ClientThread.getInstance().Session, +1,
+                                        0 }));
+                        break;
+                    }
+                    case KeyEvent.VK_SPACE: {
+                        ClientThread.getInstance().Server
+                                .placeBomb(new Event(
+                                        new Object[] { ClientThread
+                                                .getInstance().Session }));
+                        break;
+                    }
+                }
             }
         } catch (Exception ex) {
             ex.printStackTrace();

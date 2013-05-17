@@ -250,6 +250,7 @@ public class Server {
 
         // Removes player from game
         game.removePlayer(session);
+        game.getSpectatorSessions().remove(session);
         game.forcePlaygroundUpdate();
     }
 
@@ -273,7 +274,7 @@ public class Server {
 
         Game game = playerToGame.get(session);
 
-        // Send logoutmessage to other players in the game, if the player
+        // Send logout message to other players in the game, if the player
         // was the game creator and the game is not running.
         // This is necessary, because if we did not cancel the Game no one
         // can ever start it if the creator has logged out.
@@ -575,6 +576,9 @@ public class Server {
 
         Game game = games.get(gameName);
         game.getSpectatorSessions().add(session);
+
+        playerToGame.put(session, game);
+
         // Notify the client that it has joined the game
         this.clients.get(session).gameJoined(
                 new Event(new Object[] { gameName }));
