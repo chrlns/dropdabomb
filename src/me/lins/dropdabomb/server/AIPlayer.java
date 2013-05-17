@@ -26,7 +26,6 @@ import me.lins.dropdabomb.Main;
 import me.lins.dropdabomb.server.api.Element;
 import me.lins.dropdabomb.server.api.Explodable;
 
-
 /**
  * An AI-controlled player. The AI uses a modified A* algorithm for path
  * finding.
@@ -89,9 +88,11 @@ class AIPlayer extends Player {
      * @return true if Element[] contains c
      */
     private boolean contains(Element[] elements, Element c) {
-        for (Element e : elements)
-            if (c.equals(e))
+        for (Element e : elements) {
+            if (c.equals(e)) {
                 return true;
+            }
+        }
 
         return false;
     }
@@ -102,8 +103,6 @@ class AIPlayer extends Player {
      */
     public void die() {
         this.isDead = true;
-
-        // Remove player from game
         this.game.removePlayer(this);
     }
 
@@ -118,13 +117,13 @@ class AIPlayer extends Player {
 
     /**
      * Determines if the given point is a possible target zone, that means has
-     * Explodable neighbours.
+     * explodable neighbors.
      * 
      * @param pnt
      * @return
      */
     private boolean isTargetZone(Point pnt) {
-        // Determine all possible neighbours...
+        // Determine all possible neighbors...
         Element[] n1 = this.playground.getElement(pnt.x + 1, pnt.y);
         Element[] n2 = this.playground.getElement(pnt.x - 1, pnt.y);
         Element[] n3 = this.playground.getElement(pnt.x, pnt.y + 1);
@@ -179,22 +178,23 @@ class AIPlayer extends Player {
                 // And placing a bomb next to a ticking other is a even worse
                 // idea...
                 continue;
-            } else if (isTargetZone(pnt) || // Are the neighbours of point
+            } else if (isTargetZone(pnt) || // Are the neighbors of point
                                             // explodable?
                     isExtra(pnt) || // Or is it an extra we can collect?
                     closedNodes.size() > 15) {
                 // Backtrace the path
                 List<int[]> path = new ArrayList<int[]>();
                 path.add(0, node);
-                while (closedNodes.size() > 0)
+                while (closedNodes.size() > 0) {
                     path.add(0, closedNodes.remove(0));
+                }
 
                 return path;
             } else {
                 int r1 = Math.random() > 0.5 ? 1 : -1;
                 int r2 = r1 == 1 ? -1 : 1;
 
-                // Find all possible neighbours of node
+                // Find all possible neighbors of node
                 Element[] n1a = this.playground.getElement(node[0] + r1,
                         node[1]);
                 Element n1 = n1a == null ? null : n1a[0];
@@ -243,7 +243,7 @@ class AIPlayer extends Player {
     }
 
     /**
-     * Calculate escaperoute
+     * Calculate escape route
      * 
      * @param bomb
      * @return
@@ -278,7 +278,7 @@ class AIPlayer extends Player {
 
                 return path;
             } else {
-                // Get all neighbours from node
+                // Get all neighbors from node
                 Element[] n1a = this.playground
                         .getElement(node[0] + 1, node[1]);
                 Element n1 = n1a == null ? null : n1a[0];
@@ -366,16 +366,15 @@ class AIPlayer extends Player {
     }
 
     /**
-     * Moves Player
+     * Moves player
      * 
      * @param dx
      * @param dy
-     * @return true if playermoved
+     * @return true if player moved
      */
     private boolean wannaMove(int dx, int dy) {
         if (Main.Debugging)
-            System.out.println(this.nickname + " laeuft in Richtung " + dx
-                    + "/" + dy);
+            System.out.println(this.nickname + " walks " + dx + "/" + dy);
 
         boolean moved = this.game.movePlayer(this, dx, dy);
 
@@ -387,7 +386,7 @@ class AIPlayer extends Player {
     }
 
     /**
-     * A small step for AI... Moving of the Player
+     * A small step for AI... moving of the Player.
      */
     public void tick() {
         if (!this.game.isRunning())

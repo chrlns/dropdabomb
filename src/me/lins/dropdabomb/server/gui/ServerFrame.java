@@ -23,7 +23,7 @@ import javax.swing.JFrame;
 import me.lins.dropdabomb.server.ServerThread;
 
 /**
- * ServerFrame allows the user to control the Bomberman Server.
+ * ServerFrame allows the user to control the DropDaBomb Server.
  * 
  * @author Christian Lins
  */

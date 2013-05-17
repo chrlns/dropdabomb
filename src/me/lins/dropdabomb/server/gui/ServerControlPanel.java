@@ -149,10 +149,9 @@ public class ServerControlPanel extends javax.swing.JPanel {
         btnHighscoreExport = new javax.swing.JButton();
         lblExportHighscore = new javax.swing.JLabel();
 
-        lblCaption
-                .setText("Hier koennen Sie den KC Bomberman Server verwalten:");
+        lblCaption.setText("Here you can administrate the DropDaBomb server:");
 
-        btnStartServer.setText("Server starten");
+        btnStartServer.setText("Start server");
         btnStartServer.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,7 +159,7 @@ public class ServerControlPanel extends javax.swing.JPanel {
             }
         });
 
-        btnStopServer.setText("Server stoppen");
+        btnStopServer.setText("Stop server");
         btnStopServer.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,10 +167,9 @@ public class ServerControlPanel extends javax.swing.JPanel {
             }
         });
 
-        lblStartServer
-                .setText("Der Server wird auf dem lokalen Host gestartet");
+        lblStartServer.setText("Server is started on local host");
 
-        lblStopServer.setText("Den laufenden Server und alle Spiele beenden");
+        lblStopServer.setText("Stop server and all games");
 
         txtLog.setColumns(20);
         txtLog.setRows(5);
@@ -194,7 +192,7 @@ public class ServerControlPanel extends javax.swing.JPanel {
         liGames.setModel(new DefaultListModel<Game>());
         jScrollPane2.setViewportView(liGames);
 
-        btnCloseGame.setText("Beenden");
+        btnCloseGame.setText("End game");
         btnCloseGame.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -232,7 +230,7 @@ public class ServerControlPanel extends javax.swing.JPanel {
 
         tabbedPane.addTab("Spiele", tabGames);
 
-        btnKick.setText("User kicken");
+        btnKick.setText("Kick user");
         btnKick.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -243,7 +241,7 @@ public class ServerControlPanel extends javax.swing.JPanel {
         tblUserList.setModel(new UserListTableModel());
         jScrollPane1.setViewportView(tblUserList);
 
-        btnCreateUser.setText("Neuer User");
+        btnCreateUser.setText("New user");
         btnCreateUser.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -251,7 +249,7 @@ public class ServerControlPanel extends javax.swing.JPanel {
             }
         });
 
-        btnRemoveUser.setText("User entf.");
+        btnRemoveUser.setText("Remove user");
         btnRemoveUser.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -319,7 +317,7 @@ public class ServerControlPanel extends javax.swing.JPanel {
 
         tabbedPane.addTab("User", tabUsers);
 
-        btnHighscoreExport.setText("Highs. Export");
+        btnHighscoreExport.setText("Highs. export");
         btnHighscoreExport
                 .addActionListener(new java.awt.event.ActionListener() {
                     @Override
@@ -328,7 +326,7 @@ public class ServerControlPanel extends javax.swing.JPanel {
                     }
                 });
 
-        lblExportHighscore.setText("Aktuellen Highscore in Datei exportieren");
+        lblExportHighscore.setText("Export highscore to file");
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(
                 this);
@@ -425,8 +423,7 @@ public class ServerControlPanel extends javax.swing.JPanel {
         }
 
         setThread(this.getServerThread());
-        ServerControlPanel.getInstance().addLogMessages(
-                "Bombermanserver bereit ...");
+        ServerControlPanel.getInstance().addLogMessages("Server ready...");
     }// GEN-LAST:event_btnStartServerActionPerformed
 
     /**
@@ -451,7 +448,7 @@ public class ServerControlPanel extends javax.swing.JPanel {
                 ((DefaultListModel<Game>) liGames.getModel()).clear();
 
                 ServerControlPanel.getInstance().addLogMessages(
-                        "Bombermanserver gestoppt ...");
+                        "Server stopped.");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -472,7 +469,7 @@ public class ServerControlPanel extends javax.swing.JPanel {
             Server.getInstance().logout(username);
             ((UserListTableModel) tblUserList.getModel()).setValueAt("offline",
                     i, 1);
-            addLogMessages(username + " wurde gekickt");
+            addLogMessages(username + " was kicked");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -558,7 +555,7 @@ public class ServerControlPanel extends javax.swing.JPanel {
     private javax.swing.JLabel      lblExportHighscore;
     private javax.swing.JLabel      lblStartServer;
     private javax.swing.JLabel      lblStopServer;
-    private javax.swing.JList<Game>       liGames;
+    private javax.swing.JList<Game> liGames;
     private javax.swing.JScrollPane scrPane;
     private javax.swing.JPanel      tabGames;
     private javax.swing.JPanel      tabLog;

@@ -73,11 +73,11 @@ public class CHAP {
      * @return
      */
     public static long createChecksum(long random, String password) {
-        if (password == null)
+        if (password == null) {
             return -1;
+        }
 
         CRC32 crc = new CRC32();
-
         crc.update(password.getBytes());
 
         return crc.getValue() * random;
@@ -91,14 +91,15 @@ public class CHAP {
      */
     public boolean isValid(String nickname) {
         Long challenge = this.challenges.get(nickname);
-        if (challenge == null)
+        if (challenge == null) {
             return false;
+        }
 
         Date time = challenge_validity.get(challenge);
-        if (time == null)
+        if (time == null
+                || (time.getTime() < new Date().getTime() - 1000 * TIMEOUT)) {
             return false;
-        if (time.getTime() < new Date().getTime() - 1000 * TIMEOUT)
-            return false;
+        }
 
         return true;
     }

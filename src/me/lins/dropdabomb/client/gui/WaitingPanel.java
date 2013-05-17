@@ -92,7 +92,7 @@ public class WaitingPanel extends javax.swing.JPanel {
         btnStartGame = new javax.swing.JButton();
         txtInfo = new javax.swing.JTextArea();
 
-        btnStartGame.setText("Spiel starten");
+        btnStartGame.setText("Start game");
 
         txtInfo.setColumns(20);
         txtInfo.setEditable(false);

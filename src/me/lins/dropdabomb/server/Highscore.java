@@ -22,6 +22,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import me.lins.dropdabomb.util.Pair;
 
@@ -33,13 +34,13 @@ import me.lins.dropdabomb.util.Pair;
  */
 public class Highscore implements Serializable {
 
-    private static final long                             serialVersionUID = -4160498922750320232L;
+    private static final long                         serialVersionUID = -4160498922750320232L;
 
     /** Stores won and lost games per username */
-    private final HashMap<String, Pair<Integer, Integer>> data             = new HashMap<String, Pair<Integer, Integer>>();
+    private final Map<String, Pair<Integer, Integer>> data             = new HashMap<String, Pair<Integer, Integer>>();
 
     /**
-     * Get number of lost games
+     * Get number of lost games.
      * 
      * @param username
      * @return number of Lost Games
@@ -48,12 +49,13 @@ public class Highscore implements Serializable {
         Pair<Integer, Integer> p = data.get(username);
         if (p != null) {
             return p.getB();
-        } else
+        } else {
             return 0;
+        }
     }
 
     /**
-     * Get number of won games
+     * Get number of won games.
      * 
      * @param username
      * @return number of won Games
@@ -67,7 +69,7 @@ public class Highscore implements Serializable {
     }
 
     /**
-     * @return A list of names this Highscore knows.
+     * @return A list of names this highscore knows.
      */
     public List<String> getNames() {
         return new ArrayList<String>(data.keySet());

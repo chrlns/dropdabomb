@@ -25,7 +25,6 @@ import java.util.List;
 import me.lins.dropdabomb.server.api.Element;
 import me.lins.dropdabomb.server.api.Session;
 
-
 /**
  * Represents a game that can be created and started by the users.
  * 
@@ -49,7 +48,6 @@ public class Game implements Serializable {
      * No-arg constructor required for serialization.
      */
     protected Game() {
-
     }
 
     public Game(String name, Session creator) {
@@ -68,7 +66,7 @@ public class Game implements Serializable {
     }
 
     /**
-     * Adds a spectator to the playground
+     * Adds a spectator to the playground.
      * 
      * @param session
      */
@@ -77,7 +75,7 @@ public class Game implements Serializable {
     }
 
     /**
-     * Adds a player to the playground
+     * Adds a player to the playground.
      * 
      * @param player
      * @return
@@ -92,13 +90,13 @@ public class Game implements Serializable {
             x = 1;
             y = 1;
         } else if (player.getID() == 2) {
-            x = playground.getWidth() - 2;
-            y = playground.getHeight() - 2;
+            x = playground.getColumns() - 2;
+            y = playground.getRows() - 2;
         } else if (player.getID() == 3) {
             x = 1;
-            y = playground.getHeight() - 2;
+            y = playground.getRows() - 2;
         } else if (player.getID() == 4) {
-            x = playground.getWidth() - 2;
+            x = playground.getColumns() - 2;
             y = 1;
         } else
             return false; // Game is full
@@ -114,7 +112,7 @@ public class Game implements Serializable {
     }
 
     /**
-     * Returns session of the creator of the Game
+     * Returns session of the creator of the Game.
      * 
      * @return Creator
      */
@@ -123,7 +121,7 @@ public class Game implements Serializable {
     }
 
     /**
-     * Returns the list of sessions of all players in the game
+     * Returns the list of sessions of all players in the game.
      * 
      * @return player sessions
      */
@@ -132,7 +130,7 @@ public class Game implements Serializable {
     }
 
     /**
-     * Returns a list of the sessions of all spectators
+     * Returns a list of the sessions of all spectators.
      * 
      * @return list of all spectator sessions
      */
@@ -158,7 +156,7 @@ public class Game implements Serializable {
     }
 
     /**
-     * Return the playground
+     * Return the playground.
      * 
      * @return playground
      */
@@ -167,7 +165,7 @@ public class Game implements Serializable {
     }
 
     /**
-     * Returns list of all players
+     * Returns list of all players.
      * 
      * @return list of players
      */
@@ -176,7 +174,7 @@ public class Game implements Serializable {
     }
 
     /**
-     * Check if Update of the Playground is required
+     * Check if an update of the playground is required.
      * 
      * @return true if update is required
      */
@@ -188,7 +186,7 @@ public class Game implements Serializable {
     }
 
     /**
-     * Removes player from the playground
+     * Removes player from the playground.
      * 
      * @param x
      * @param y
@@ -201,7 +199,7 @@ public class Game implements Serializable {
     }
 
     /**
-     * Removes player from playerSession list
+     * Removes player from playerSessions list.
      * 
      * @param session
      */
@@ -210,7 +208,7 @@ public class Game implements Serializable {
     }
 
     /**
-     * Removes player from playerlist
+     * Removes player from playerlist.
      * 
      * @param player
      */
@@ -236,8 +234,8 @@ public class Game implements Serializable {
         int nx = player.getX() + dx;
         int ny = player.getY() + dy;
 
-        if (nx < 0 || ny < 0 || this.playground.getWidth() <= nx
-                || this.playground.getHeight() <= ny)
+        if (nx < 0 || ny < 0 || this.playground.getColumns() <= nx
+                || this.playground.getRows() <= ny)
             return false;
 
         Element el = this.playground.getElement(nx, ny)[0];
@@ -281,7 +279,7 @@ public class Game implements Serializable {
     }
 
     /**
-     * Set the Playground
+     * Sets the playground.
      * 
      * @param playground
      */
@@ -290,7 +288,7 @@ public class Game implements Serializable {
     }
 
     /**
-     * Checks if game is Running
+     * Checks if game is running.
      * 
      * @return true if is running
      */
@@ -299,7 +297,7 @@ public class Game implements Serializable {
     }
 
     /**
-     * Sets game status
+     * Sets game status.
      * 
      * @param running
      */

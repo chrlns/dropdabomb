@@ -1,6 +1,6 @@
 /*
- *  KC Bomberman
- *  Copyright (C) 2008,2009 Christian Lins <cli@openoffice.org>
+ *  DropDaBomb
+ *  Copyright (C) 2008-2013 Christian Lins <christian@lins.me>
  *  Copyright (C) 2008 Kai Ritterbusch <kai.ritterbusch@googlemail.com>
  * 
  *  This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,6 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package me.lins.dropdabomb.server;
 
 import java.io.OutputStream;
@@ -27,99 +26,99 @@ import me.lins.dropdabomb.net.EventDispatcherBase;
 
 /**
  * Sends Events to a connected client.
+ * 
  * @author Christian Lins
  */
-class ServerOutput extends EventDispatcherBase implements ServerListenerInterface
-{
+class ServerOutput extends EventDispatcherBase implements
+        ServerListenerInterface {
 
-  public ServerOutput(OutputStream out)
-  {
-    super(out);
-  }
-  
-  public void continueLogin(Event event)
-  {
-    System.out.println("ServerOutput.continueLogin()");
-    event.setMethodName("continueLogin");
-    dispatchEvent(event);
-  }
-  
-  public void explosion(Event event) 
-  {
-    event.setMethodName("explosion");
-    dispatchEvent(event);
-  }
+    public ServerOutput(OutputStream out) {
+        super(out);
+    }
 
-  public void gameJoined(Event event) 
-  {
-    event.setMethodName("gameJoined");
-    dispatchEvent(event);
-  }
+    @Override
+    public void continueLogin(Event event) {
+        System.out.println("ServerOutput.continueLogin()");
+        event.setMethodName("continueLogin");
+        dispatchEvent(event);
+    }
 
-  public void gameListUpdate(Event event) 
-  {
-    event.setMethodName("gameListUpdate");
-    dispatchEvent(event);
-  }
+    @Override
+    public void explosion(Event event) {
+        event.setMethodName("explosion");
+        dispatchEvent(event);
+    }
 
-  public void gameStarted(Event event) 
-  {
-    event.setMethodName("gameStarted");
-    dispatchEvent(event);
-  }
+    @Override
+    public void gameJoined(Event event) {
+        event.setMethodName("gameJoined");
+        dispatchEvent(event);
+    }
 
-  public void gameStopped(Event event) 
-  {
-    event.setMethodName("gameStopped");
-    dispatchEvent(event);
-  }
+    @Override
+    public void gameListUpdate(Event event) {
+        event.setMethodName("gameListUpdate");
+        dispatchEvent(event);
+    }
 
-  public void loggedIn(Event event) 
-  {
-    event.setMethodName("loggedIn");
-    dispatchEvent(event);
-  }
+    @Override
+    public void gameStarted(Event event) {
+        event.setMethodName("gameStarted");
+        dispatchEvent(event);
+    }
 
-  public void loggedOut(Event event) 
-  {
-    event.setMethodName("loggedOut");
-    dispatchEvent(event);
-  }
+    @Override
+    public void gameStopped(Event event) {
+        event.setMethodName("gameStopped");
+        dispatchEvent(event);
+    }
 
-  public void playerDied(Event event) 
-  {
-    event.setMethodName("playerDied");
-    dispatchEvent(event);
-  }
+    @Override
+    public void loggedIn(Event event) {
+        event.setMethodName("loggedIn");
+        dispatchEvent(event);
+    }
 
-  public void playerLeftGame(Event event) 
-  {
-    event.setMethodName("playerLeftGame");
-    dispatchEvent(event);
-  }
+    @Override
+    public void loggedOut(Event event) {
+        event.setMethodName("loggedOut");
+        dispatchEvent(event);
+    }
 
-  public void playgroundUpdate(Event event) 
-  {
-    event.setMethodName("playgroundUpdate");
-    dispatchEvent(event);
-  }
+    @Override
+    public void playerDied(Event event) {
+        event.setMethodName("playerDied");
+        dispatchEvent(event);
+    }
 
-  public void receiveChatMessage(Event event) 
-  {
-    event.setMethodName("receiveChatMessage");
-    dispatchEvent(event);
-  }
+    @Override
+    public void playerLeftGame(Event event) {
+        event.setMethodName("playerLeftGame");
+        dispatchEvent(event);
+    }
 
-  public void userListUpdate(Event event) 
-  {
-    event.setMethodName("userListUpdate");
-    dispatchEvent(event);
-  }
+    @Override
+    public void playgroundUpdate(Event event) {
+        event.setMethodName("playgroundUpdate");
+        dispatchEvent(event);
+    }
 
-  public void youDied(Event event) 
-  {
-    event.setMethodName("youDied");
-    dispatchEvent(event);
-  }
+    @Override
+    public void receiveChatMessage(Event event) {
+        event.setMethodName("receiveChatMessage");
+        dispatchEvent(event);
+    }
+
+    @Override
+    public void userListUpdate(Event event) {
+        event.setMethodName("userListUpdate");
+        dispatchEvent(event);
+    }
+
+    @Override
+    public void youDied(Event event) {
+        event.setMethodName("youDied");
+        dispatchEvent(event);
+    }
 
 }

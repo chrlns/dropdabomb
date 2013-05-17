@@ -63,9 +63,9 @@ public class UserFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
-        setTitle("Neuen User erstellen");
+        setTitle("Create new user");
 
-        btnOk.setText("Erstellen");
+        btnOk.setText("Create");
         btnOk.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,7 +73,7 @@ public class UserFrame extends javax.swing.JFrame {
             }
         });
 
-        btnCancel.setText("Abbrechen");
+        btnCancel.setText("Cancel");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,9 +90,9 @@ public class UserFrame extends javax.swing.JFrame {
 
         jLabel1.setText("Username:");
 
-        jLabel2.setText("PW:");
+        jLabel2.setText("Password:");
 
-        jLabel3.setText("PW (best.)");
+        jLabel3.setText("Password (again)");
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(
                 getContentPane());
@@ -217,9 +217,7 @@ public class UserFrame extends javax.swing.JFrame {
 
             this.setVisible(false);
         } else {
-            JOptionPane
-                    .showMessageDialog(this,
-                            "Das Passwort und die Bestaetigung stimmen nicht ueberein!!");
+            JOptionPane.showMessageDialog(this, "Passwords are not equal!");
         }
     }// GEN-LAST:event_btnOkActionPerformed
 

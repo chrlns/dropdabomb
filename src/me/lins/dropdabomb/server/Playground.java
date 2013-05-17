@@ -22,7 +22,6 @@ import java.io.Serializable;
 
 import me.lins.dropdabomb.server.api.Element;
 
-
 /**
  * Logical Playground where the Server manages a game. This class is
  * serializable and takes most of the network bandwidth.
@@ -95,20 +94,16 @@ public class Playground implements Serializable {
     }
 
     /**
-     * Rename tp getColumns
-     * 
-     * @return
+     * @return Number of columns.
      */
-    public int getWidth() {
+    public int getColumns() {
         return cols;
     }
 
     /**
-     * TODO: rename to getRows
-     * 
-     * @return
+     * @return Number of rows.
      */
-    public int getHeight() {
+    public int getRows() {
         return rows;
     }
 

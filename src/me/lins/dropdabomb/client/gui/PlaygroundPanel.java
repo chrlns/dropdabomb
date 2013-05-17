@@ -223,8 +223,8 @@ public class PlaygroundPanel extends JPanel implements KeyListener {
     }
 
     public void updatePlaygroundView(Playground playground) {
-        int cols = playground.getWidth();
-        int rows = playground.getHeight();
+        int cols = playground.getColumns();
+        int rows = playground.getRows();
 
         for (int x = 0; x < cols; x++) {
             for (int y = 0; y < rows; y++) {

@@ -1,7 +1,7 @@
 /*
- *  KC Bomberman
- *  Copyright 2008 Christian Lins <christian.lins@web.de>
- *  Copyright 2008 Kai Ritterbusch <kai.ritterbusch@googlemail.com>
+ *  DropDaBomb
+ *  Copyright (C) 2008-2013 Christian Lins <christian@lins.me>
+ *  Copyright (C) 2008 Kai Ritterbusch <kai.ritterbusch@googlemail.com>
  * 
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -16,7 +16,6 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package me.lins.dropdabomb.server;
 
 import java.io.PrintStream;
@@ -27,39 +26,36 @@ import java.util.TimeZone;
 
 /**
  * Provides logging methods.
- * @author Kai Ritterbusch (kai.ritterbusch@fh-osnabrueck.de)
+ * 
+ * @author Kai Ritterbusch
  */
-public class Logger 
-{
-  public static final String FILENAME = "server.log";
-  
-  private PrintStream out = System.out;
-    
-  public Logger()
-  {
-    try
-    {
-      out = new PrintStream(FILENAME);  
+public class Logger {
+    public static final String FILENAME = "server.log";
+
+    private PrintStream        out      = System.out;
+
+    public Logger() {
+        try {
+            out = new PrintStream(FILENAME);
+        } catch (Exception ex) {
+            System.err.println("Logging disabled due to exception: "
+                    + ex.getLocalizedMessage());
+        }
     }
-    catch(Exception ex)
-    {
-      System.err.println("Logging disabled due to exception: " + ex.getLocalizedMessage());
+
+    /**
+     * Adds log message to server.log.
+     * 
+     * @param action
+     * @param ip
+     */
+    public void log(String action, String ip) {
+        // Creates actual Date
+        Calendar cal = new GregorianCalendar(TimeZone.getTimeZone("ECT"));
+        SimpleDateFormat formater = new SimpleDateFormat();
+        String date = formater.format(cal.getTime());
+
+        out.println(date + ": " + ip + "->" + action);
+        out.flush();
     }
-  }
-  
-  /**
-   * Adds log message to server.log
-   * @param action
-   * @param ip
-   */
-  public void log(String action, String ip)
-  {
-    // Creates actual Date
-    Calendar cal = new GregorianCalendar( TimeZone.getTimeZone("ECT") );
-    SimpleDateFormat formater = new SimpleDateFormat();
-    String date = formater.format(cal.getTime());
-    
-    out.println(date + ": " + ip + "->" + action);
-    out.flush();
-  }
 }

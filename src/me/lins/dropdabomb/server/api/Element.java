@@ -37,7 +37,6 @@ public abstract class Element implements Serializable {
      * No-arg constructor required for serialization.
      */
     protected Element() {
-
     }
 
     public Element(int x, int y) {

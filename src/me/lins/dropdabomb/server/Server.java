@@ -87,8 +87,7 @@ public class Server {
     private final Map<Session, Game>                    playerToGame = new ConcurrentHashMap<Session, Game>();
     /**
      * Stores the Session => IP-Address relation. This Map is instance of
-     * ConcurrentHashMap and therefor thread-safe. TODO: Is that still
-     * necessary?
+     * ConcurrentHashMap and therefor thread-safe.
      */
     private final Map<Session, String>                  playerToIP   = new ConcurrentHashMap<Session, String>();
     /**
@@ -240,8 +239,8 @@ public class Server {
         }
     }
 
-    /*
-     * Removes Player from Playground, e.g. when he presses the Escape-Key
+    /**
+     * Removes Player from Playground, e.g. when he presses the Escape-Key.
      */
     public void leaveGame(Session session) {
         Game game = playerToGame.get(session);
@@ -277,7 +276,7 @@ public class Server {
         // Send logoutmessage to other players in the game, if the player
         // was the game creator and the game is not running.
         // This is necessary, because if we did not cancel the Game no one
-        // can ever start it if the creator has logged out
+        // can ever start it if the creator has logged out.
         if (game != null && !game.isRunning()
                 && game.getCreator().equals(session)) {
             stopGame(game);
@@ -293,7 +292,7 @@ public class Server {
     }
 
     /**
-     * Stopps a game and sends a gameStopped() message to all players playing
+     * Stops a game and sends a gameStopped() message to all players playing
      * this specific game. Additionally this method stops all AIPlayerThreads
      * running with this game.
      * 
@@ -332,10 +331,8 @@ public class Server {
         if (ServerControlPanel.getInstance() != null) {
             ServerControlPanel.getInstance().removeGame(
                     games.get(game.toString()));
-            ServerControlPanel.getInstance()
-                    .addLogMessages(
-                            "Spiel: " + game.toString()
-                                    + " wurde durch Server beendet");
+            ServerControlPanel.getInstance().addLogMessages(
+                    "Game " + game.toString() + " was terminated by server");
         }
 
         games.remove(game.toString());
@@ -344,7 +341,7 @@ public class Server {
     }
 
     /**
-     * Notifies the Server of a Client movement.
+     * Notifies the server of a client movement.
      * 
      * @param session
      * @param x
@@ -404,8 +401,7 @@ public class Server {
 
         for (Session sess : clients.keySet()) {
             clients.get(sess).receiveChatMessage(
-                    new Event(new Object[] { answer })); // TODO: Spielende
-                                                         // Player ausblenden
+                    new Event(new Object[] { answer }));
         }
     }
 
@@ -474,9 +470,6 @@ public class Server {
         try {
             Session session = new Session();
 
-            // System.out.println(nickname + " hat sich eingeloggt: " +
-            // getClientHost());
-
             // Checks if user is allowed to login
             if (database.getPassword(nickname) == null) {
                 return false;
@@ -504,7 +497,7 @@ public class Server {
             // Log-Message
             if (ServerControlPanel.getInstance() != null) {
                 ServerControlPanel.getInstance().addLogMessages(
-                        nickname + " hat sich eingeloggt");
+                        nickname + " logged in");
             }
 
             // register in Clientlist
@@ -556,7 +549,7 @@ public class Server {
     }
 
     /**
-     * Stopps and deletes a game.
+     * Stops and deletes a game.
      * 
      * @param gameName
      */
@@ -631,7 +624,7 @@ public class Server {
         for (Session sess : game.getPlayerSessions()) {
             clients.get(sess).receiveChatMessage(
                     new Event(new Object[] { players.get(session).getNickname()
-                            + " has joined Game" }));
+                            + " has joined game" }));
         }
 
         // Check if the game has now four players.
@@ -677,7 +670,7 @@ public class Server {
             // Log-Message
             if (ServerControlPanel.getInstance() != null) {
                 ServerControlPanel.getInstance().addLogMessages(
-                        "Spiel: " + gameName + " wurde erstellt");
+                        "Game " + gameName + " was created");
                 ServerControlPanel.getInstance().addGame(game);
             }
 
@@ -704,8 +697,7 @@ public class Server {
         logger.log("login", playerToIP.get(session));
 
         System.out.println("Session ok");
-        if (!games.containsKey(gameName)) // No such game
-        {
+        if (!games.containsKey(gameName)) { // No such game
             return false;
         } else {
             Game game = this.games.get(gameName);

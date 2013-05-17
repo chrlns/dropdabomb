@@ -44,14 +44,12 @@ class ExplosionConsumer extends Thread {
             try {
                 // Calling take() blocks if the queue is empty
                 List<Object> explData = this.server.getExplosions().take();
-                if (explData == null) // Queue is empty
-                {
+                if (explData == null) { // Queue is empty
                     break;
                 }
 
                 Game game = (Game) explData.get(0);
-                if (!game.isRunning()) // Game could be stopped until now
-                {
+                if (!game.isRunning()) { // Game could be stopped until now
                     continue;
                 }
 
@@ -107,7 +105,7 @@ class ExplosionConsumer extends Thread {
         }
     }
 
-    /*
+    /**
      * Get randomized extras or null after explosion
      * 
      * @return Element or null
@@ -166,9 +164,10 @@ class ExplosionConsumer extends Thread {
                             this.server.getClients().get(sess)
                                     .youDied(new Event(new Object[0]));
 
-                            // Remove session from game; this is important,
-                            // otherwise
-                            // the game would not stop
+                            /*
+                             * Remove session from game; this is important,
+                             * otherwise the game would not stop
+                             */
                             game.removePlayer(sess);
                             this.server.getPlayerToGame().remove(sess);
                         }
