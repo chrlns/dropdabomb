@@ -45,13 +45,14 @@ public class MainFrame extends JFrame {
         return instance;
     }
 
-    private final LobbyPanel lobbyPanel = new LobbyPanel();
+    protected LobbyPanel lobbyPanel = new LobbyPanel();
+    protected StartPanel startPanel = new StartPanel();
 
     public MainFrame() {
         instance = this;
         setTitle("DropDaBomb - A Free Java B*mberm*n Clone");
         resetSize();
-        setContentPane(new StartPanel());
+        showStartPanel();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         WindowListener listener = new WindowAdapter() {
@@ -101,10 +102,15 @@ public class MainFrame extends JFrame {
         return lobbyPanel;
     }
 
+    public void showStartPanel() {
+        setContentPane(this.startPanel);
+    }
+
     @Override
     public void setVisible(boolean state) {
-        if (!state)
+        if (!state) {
             instance = null;
+        }
         super.setVisible(state);
     }
 

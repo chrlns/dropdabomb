@@ -62,7 +62,8 @@ public interface ServerListenerInterface {
     void loggedIn(Event event);
 
     /**
-     * The Client was logged out. Event parameter contains no argument.
+     * The Client was logged out. Event parameter contains a LogoutReason
+     * object.
      */
     void loggedOut(Event event);
 

@@ -31,6 +31,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import me.lins.dropdabomb.client.api.ServerListenerInterface;
 import me.lins.dropdabomb.net.Event;
+import me.lins.dropdabomb.net.LogoutReason;
 import me.lins.dropdabomb.server.api.GameInfo;
 import me.lins.dropdabomb.server.api.Session;
 import me.lins.dropdabomb.server.gui.ServerControlPanel;
@@ -224,13 +225,16 @@ public class Server {
             if (ent.getValue().getNickname().equals(userName)) {
                 Game game = playerToGame.get(ent.getKey());
                 if (game != null) {
-                    // send logoutmessage to other players in the game
+                    // send logout message to other players in the game
                     if (game.getCreator().equals(ent.getKey())) {
                         stopGame(game);
                     }
                 }
-                this.clients.get(ent.getKey()).loggedOut(
-                        new Event(new Object[0]));
+                this.clients
+                        .get(ent.getKey())
+                        .loggedOut(
+                                new Event(
+                                        new Object[] { LogoutReason.KICKED_BY_ADMIN }));
                 players.remove(ent.getKey());
                 clients.remove(ent.getKey());
 

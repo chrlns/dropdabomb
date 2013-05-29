@@ -35,6 +35,7 @@ import me.lins.dropdabomb.client.gui.WaitingPanel;
 import me.lins.dropdabomb.client.io.Resource;
 import me.lins.dropdabomb.net.Event;
 import me.lins.dropdabomb.net.EventReceiverBase;
+import me.lins.dropdabomb.net.LogoutReason;
 import me.lins.dropdabomb.server.Playground;
 import me.lins.dropdabomb.server.api.GameInfo;
 import me.lins.dropdabomb.server.api.Session;
@@ -212,11 +213,10 @@ public class ClientInput extends EventReceiverBase implements
      * Notifies the Client that he was logged out. Shows the StartPanel.
      * 
      * @param event
-     *            Not used.
      */
     @Override
     public void loggedOut(Event event) {
-        MainFrame.getInstance().setVisible(false);
+        MainFrame.getInstance().showStartPanel();
 
         try {
             ClientThread.getInstance().disconnect();
@@ -225,6 +225,12 @@ public class ClientInput extends EventReceiverBase implements
         }
         ClientThread.getInstance().Session = null;
         ClientThread.getInstance().Server = null;
+
+        if (((LogoutReason) event.getArguments()[0])
+                .equals(LogoutReason.INVALID_CREDENTIALS)) {
+            JOptionPane.showMessageDialog(null, "Wrong username or password!",
+                    "Login failed", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     /**

@@ -22,9 +22,9 @@ import java.io.InputStream;
 
 import me.lins.dropdabomb.net.Event;
 import me.lins.dropdabomb.net.EventReceiverBase;
+import me.lins.dropdabomb.net.LogoutReason;
 import me.lins.dropdabomb.server.api.ServerInterface;
 import me.lins.dropdabomb.server.api.Session;
-
 
 /**
  * Handles the InputStream of a Client's socket. In most aspects this class is
@@ -74,7 +74,12 @@ class ServerInput extends EventReceiverBase implements ServerInterface {
                 + ")");
         long challenge = Server.getInstance().login1(
                 (String) event.getArguments()[0]);
-        this.out.continueLogin(new Event(new Object[] { challenge }));
+        if (challenge == 0) {
+            this.out.loggedOut(new Event(
+                    new Object[] { LogoutReason.INVALID_CREDENTIALS }));
+        } else {
+            this.out.continueLogin(new Event(new Object[] { challenge }));
+        }
     }
 
     @Override
